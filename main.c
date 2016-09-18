@@ -10,6 +10,7 @@ __xdata unsigned char image[] = {
 0x81,0x01,0x3F,0x3F,0x3F,0x01,0x81,0xFF,
 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
 };
+signed char data[] = {0,0,0,0,0,0};
 unsigned char index = 0;
 void zhenFun()
 {
@@ -19,12 +20,25 @@ void zhenFun()
 		index = 0;
 	}
 }
+
+void ledFun()
+{
+	setAllLedToggle();
+}
 void main()
 {
+	int i = 0;
 	addTIMER0Task(200,zhenFun,1);
+	addTIMER0Task(1000,ledFun,2);
+	
 	while(1)
 	{
-		updateLedZhen(image+index);
-		updateTIMER0();
+		switch(i)
+		{
+			case 0:updateLedZhen(image+index); i = 1;break;
+			case 1:updateLedShu(data);i = 2;break;
+			case 2:updateTIMER0();i= 3;break;
+			case 3:updateLed();i = 0; break;
+		}
 	}
 }

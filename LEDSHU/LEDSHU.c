@@ -18,9 +18,10 @@ __xdata unsigned char LedChar[] = {
 void updateLedShu(unsigned char data[])
 {
 	static unsigned char ledShuNum = 0;
+	LEDSHU = 0xFF;
 	ENLED = 0;
 	ADDR3 = 1;
-	LEDSHU = 0xFF;
+	
 	switch(ledShuNum)
 	{
 		case 0: 

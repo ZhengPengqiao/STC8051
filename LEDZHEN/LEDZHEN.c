@@ -8,9 +8,9 @@
 void updateLedZhen(unsigned char image[])
 {
 	static unsigned char ledZhenNum = 0;
+	LEDZHENDATA = 0xFF;
 	ENLED = 0;   //使能U3/U4
 	ADDR3 = 0;   //使能U4
-	LEDZHENDATA = 0xFF;
 	switch(ledZhenNum)
 	{
 		case 0: 
