@@ -6,6 +6,7 @@
 ********************************************************************************/
 #define LED    P0
 #define LEDZHENDATA    P0
+#define LEDSHU P0
 #define LEDDATA P0
 #define ADDR0  P1_0
 #define ADDR1  P1_1

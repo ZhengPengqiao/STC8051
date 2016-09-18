@@ -1,45 +1,33 @@
 #include "LED.h"
 #include "TIMER.h"
-
+#include "LEDSHU.h"
 
 /*******************************************************************************
- *  函数名称: Led1Fun
+ *  函数名称: LedShuFun
  *  函数介绍: 定时任务到期时将会执行的函数
  *  参数介绍: 无
  *  返回值  : 无
  ******************************************************************************/
-void Led1Fun()
+unsigned char ledarray[] = {0,0,0,0,0,0};
+unsigned int a = 0;
+
+void timerFun()
 {
-	setLedToggle(1);
+	a++;
+	ledarray[0] = a    % 10;
+	ledarray[1] = a /10 % 10;
+	ledarray[2] = a /100 % 10;
+	ledarray[3] = a /1000 % 10;
+	ledarray[4] = a /10000 % 10;
+	setLedShuNum(ledarray);
 }
-
-void Led2Fun()
-{
-	setLedToggle(2);
-}
-
-void Led3Fun()
-{
-	setLedToggle(3);
-}
-
-void Led4Fun()
-{
-	setLedToggle(4);
-}
-
-
 void main()
 {
-	
-	timer0Add(1000,Led1Fun,1);  //添加一个定时任务
-	timer0Add(2000,Led2Fun,1);  //添加一个定时任务
-	timer0Add(4000,Led3Fun,1);  //添加一个定时任务
-	timer0Add(8000,Led4Fun,1);  //添加一个定时任务
-		
+	addTIMER0Task(1000,timerFun,1);
+	setLedShuNum(ledarray);
 	while(1)
 	{
-		ledUpdate();
-		TIMER0Update();
+	    updateLedShu();
+	    updateTIMER0();
 	}
 }

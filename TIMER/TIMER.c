@@ -88,7 +88,7 @@ int getTaskCount()
  *			： intag    ： 当前任务的标志，删除时候使用
  *  返回    ：  无   
  ******************************************************************************/
-void timer0Add(unsigned int inTimerMs,void (*inTimerFun0)(),int intag)
+void addTIMER0Task(unsigned int inTimerMs,void (*inTimerFun0)(),int intag)
 {
 	int i;
 	if(taskCount == 0) //在添加第一次任务时，会初始化。
@@ -115,7 +115,7 @@ void timer0Add(unsigned int inTimerMs,void (*inTimerFun0)(),int intag)
  *  参数介绍 ：  intag    ： 要删除的任务的标志
  *  返回    ：  无   
  ******************************************************************************/
-void timer0Del(int intag)
+void delTIMER0Task(int intag)
 {
 	int i;
 	for(i = 0; i < timer0TaskCount; i++)
@@ -149,7 +149,7 @@ void InterruptTimer0() __interrupt 1
  *  参数介绍 ：  无
  *  返回    ：  无   
  ******************************************************************************/
-void TIMER0Update()
+void updateTIMER0()
 {
 	int i;
 	for(i = 0; i < timer0TaskCount; i++)

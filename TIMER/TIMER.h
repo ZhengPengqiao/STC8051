@@ -39,7 +39,7 @@ extern void InterruptTimer0() __interrupt 1;
  *  参数介绍 ：  无
  *  返回    ：  无   
  ******************************************************************************/
-extern void TIMER0Update();
+extern void updateTIMER0();
 /*******************************************************************************
  *  函数名字 ：  timer0Add
  *  函数介绍 ：  添加定时服务
@@ -48,14 +48,14 @@ extern void TIMER0Update();
  *			： intag    ： 当前任务的标志，删除时候使用
  *  返回    ：  无   
  ******************************************************************************/
-extern void timer0Add(unsigned int inTimerMs,void (*inTimerFun0)(),int intag);
+extern void addTIMER0Task(unsigned int inTimerMs,void (*inTimerFun0)(),int intag);
 /*******************************************************************************
  *  函数名字 ：  timer0Del
  *  函数介绍 ：  删除定时服务
  *  参数介绍 ：  intag    ： 要删除的任务的标志
  *  返回    ：  无   
  ******************************************************************************/
-extern void timer0Del(int intag);
+extern void delTIMER0Task(int intag);
 /*******************************************************************************
  *  函数名字 ：  delay10usValue
  *  函数介绍 ：  不精确延时,阻塞定义微秒,建议使用定时器1.
