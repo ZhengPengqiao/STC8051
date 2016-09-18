@@ -19,15 +19,13 @@ void timerFun()
 	ledarray[2] = a /100 % 10;
 	ledarray[3] = a /1000 % 10;
 	ledarray[4] = a /10000 % 10;
-	setLedShuNum(ledarray);
 }
 void main()
 {
 	addTIMER0Task(1000,timerFun,1);
-	setLedShuNum(ledarray);
 	while(1)
 	{
-	    updateLedShu();
+	    updateLedShu(ledarray);
 	    updateTIMER0();
 	}
 }
