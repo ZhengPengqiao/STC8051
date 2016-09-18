@@ -1,31 +1,30 @@
 #include "LED.h"
 #include "TIMER.h"
 #include "LEDSHU.h"
+#include "LEDZHEN.h"
 
-/*******************************************************************************
- *  函数名称: LedShuFun
- *  函数介绍: 定时任务到期时将会执行的函数
- *  参数介绍: 无
- *  返回值  : 无
- ******************************************************************************/
-unsigned char ledarray[] = {0,0,0,0,0,0};
-unsigned int a = 0;
-
-void timerFun()
+__xdata unsigned char image[] = {
+0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+0x7D,0x01,0x01,0x7D,0xFF,0xFF,0xE3,0xC1,
+0x81,0x03,0x03,0x81,0xC1,0xE3,0xFF,0xFF,
+0x81,0x01,0x3F,0x3F,0x3F,0x01,0x81,0xFF,
+0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+};
+unsigned char index = 0;
+void zhenFun()
 {
-	a++;
-	ledarray[0] = a    % 10;
-	ledarray[1] = a /10 % 10;
-	ledarray[2] = a /100 % 10;
-	ledarray[3] = a /1000 % 10;
-	ledarray[4] = a /10000 % 10;
+	index ++;
+	if(index > 32)
+	{
+		index = 0;
+	}
 }
 void main()
 {
-	addTIMER0Task(1000,timerFun,1);
+	addTIMER0Task(200,zhenFun,1);
 	while(1)
 	{
-	    updateLedShu(ledarray);
-	    updateTIMER0();
+		updateLedZhen(image+index);
+		updateTIMER0();
 	}
 }
