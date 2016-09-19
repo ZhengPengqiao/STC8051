@@ -21,9 +21,23 @@ void zhenFun()
 	}
 }
 
+
+
 void ledFun()
 {
 	setAllLedToggle();
+}
+
+void timer2Fun()
+{
+	static unsigned char i = 0;
+	switch(i)
+	{
+		case 0:updateLedZhen(image+index); i = 1;break;
+		case 1:updateLedShu(data);i = 2;break;
+		case 2:updateLed();i = 0; break;
+	}
+	
 }
 void main()
 {
@@ -31,14 +45,10 @@ void main()
 	addTIMER0Task(200,zhenFun,1);
 	addTIMER0Task(1000,ledFun,2);
 	
+	initTimer2(600);
+	setTimer2Fun(timer2Fun);
 	while(1)
 	{
-		switch(i)
-		{
-			case 0:updateLedZhen(image+index); i = 1;break;
-			case 1:updateLedShu(data);i = 2;break;
-			case 2:updateTIMER0();i= 3;break;
-			case 3:updateLed();i = 0; break;
-		}
+		updateTIMER0();
 	}
 }
