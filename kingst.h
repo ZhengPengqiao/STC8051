@@ -27,4 +27,5 @@
 #define KEYOUT2 P2_2
 #define KEYOUT3 P2_1
 #define KEYOUT4 P2_0
+#define BUZZ    P1_6
 #endif
