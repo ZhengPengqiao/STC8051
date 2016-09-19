@@ -7,7 +7,6 @@
 #ifndef __LEDSHU_H_
 #define __LEDSHU_H_
 
-#include <8052.h>
 #include "kingst.h"
 /*******************************************************************************
  * 函数名称 : updateLedShu

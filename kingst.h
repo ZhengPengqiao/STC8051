@@ -18,4 +18,13 @@
 #define LED3    P0_2
 #define LED4    P0_3
 #define LED5    P0_4
+
+#define KEYIN1  P2_4
+#define KEYIN2  P2_5
+#define KEYIN3  P2_6
+#define KEYIN4  P2_7
+#define KEYOUT1 P2_3
+#define KEYOUT2 P2_2
+#define KEYOUT3 P2_1
+#define KEYOUT4 P2_0
 #endif

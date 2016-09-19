@@ -1,7 +1,6 @@
 #ifndef __LEDZHEN_H_
 #define __LEDZHEN_H_
 
-#include <8052.h>
 #include "kingst.h"
 /*******************************************************************************
  * 函数名称 : updateLedZhen

@@ -206,6 +206,7 @@ void delay10usValue(unsigned int value)
  ******************************************************************************/
 void initTimer2(unsigned int value)
 {
+	EA = 1;  //开中断
 	/*设置定时器*/
 	TIMER2FUN = 0;
 	T2CON = 0x00;
