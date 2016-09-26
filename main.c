@@ -16,7 +16,7 @@ void main()
 	{
 		sendString("plese input",11);
 		sendChar(':');
-		readString(ch,10);
+		readStringWait(ch,10);
 		ch[10] = '\0';
 		sendString(ch,10);
 		sendNewLine();

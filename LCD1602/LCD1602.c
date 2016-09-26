@@ -117,7 +117,7 @@ void LcdAreaClear(unsigned char x, unsigned char y, unsigned char len)
  * 函数名称 : LcdShowString
  * 函数介绍 : 显示字符串
  * 参数介绍 : x,y: 字符串显示的位置
- * 			str : 将要显示的字符串
+ * 			str : 将要显示的字符串,以'\0'结尾
  * 返回值   : 无
  ******************************************************************************/
 void LcdShowString(unsigned char x, unsigned char y,unsigned char *str)
