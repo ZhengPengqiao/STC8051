@@ -6,20 +6,25 @@
 #include "BUZZER.h"
 #include "UART.h"
 #include "LCD1602.h"
+#include "HC05.h"
+
 
 void main()
 {
-	char ch[22];
+	unsigned char str[17];
+	unsigned len =  0;
 	initUart(9600);
 	initLcd();
+	HC05Init();
 	while(1)
 	{
-		sendString("plese input",11);
-		sendChar(':');
-		readStringWait(ch,10);
-		ch[10] = '\0';
-		sendString(ch,10);
-		sendNewLine();
-		LcdShowString(0,0,ch);
+		len = readString(str,16);
+		if(len != 0)
+		{
+			str[len] = '\0';
+		}
+		LcdAreaClear(0,1,16);
+		LcdShowString(0,1,str);
+		delay10usValue(50000);
 	}
 }
