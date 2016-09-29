@@ -16,7 +16,15 @@ void main()
 
 	initUart(9600);
 	initLcd();
-	HC05Init();
+	
+	//知道初始化成功为止
+	while(!HC05Init())
+	{
+		LcdShowString(0,0,"HC05-ERR");
+	}
+
+	LcdAreaClear(0,0,15);
+	LcdShowString(0,0,"HC05-OK");
 	
 	while(1)
 	{
