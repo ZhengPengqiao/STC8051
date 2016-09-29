@@ -44,5 +44,4 @@
 //使能端
 #define LCD1602_E P1_5
 
-
 #endif
