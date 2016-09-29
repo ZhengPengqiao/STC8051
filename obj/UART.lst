@@ -1,0 +1,869 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.5.0 #9253 (Mar 24 2016) (Linux)
+                                      4 ; This file was generated Thu Sep 29 13:34:06 2016
+                                      5 ;--------------------------------------------------------
+                                      6 	.module UART
+                                      7 	.optsdcc -mmcs51 --model-small
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _TF2
+                                     13 	.globl _EXF2
+                                     14 	.globl _RCLK
+                                     15 	.globl _TCLK
+                                     16 	.globl _EXEN2
+                                     17 	.globl _TR2
+                                     18 	.globl _C_T2
+                                     19 	.globl _CP_RL2
+                                     20 	.globl _T2CON_7
+                                     21 	.globl _T2CON_6
+                                     22 	.globl _T2CON_5
+                                     23 	.globl _T2CON_4
+                                     24 	.globl _T2CON_3
+                                     25 	.globl _T2CON_2
+                                     26 	.globl _T2CON_1
+                                     27 	.globl _T2CON_0
+                                     28 	.globl _PT2
+                                     29 	.globl _ET2
+                                     30 	.globl _CY
+                                     31 	.globl _AC
+                                     32 	.globl _F0
+                                     33 	.globl _RS1
+                                     34 	.globl _RS0
+                                     35 	.globl _OV
+                                     36 	.globl _F1
+                                     37 	.globl _P
+                                     38 	.globl _PS
+                                     39 	.globl _PT1
+                                     40 	.globl _PX1
+                                     41 	.globl _PT0
+                                     42 	.globl _PX0
+                                     43 	.globl _RD
+                                     44 	.globl _WR
+                                     45 	.globl _T1
+                                     46 	.globl _T0
+                                     47 	.globl _INT1
+                                     48 	.globl _INT0
+                                     49 	.globl _TXD
+                                     50 	.globl _RXD
+                                     51 	.globl _P3_7
+                                     52 	.globl _P3_6
+                                     53 	.globl _P3_5
+                                     54 	.globl _P3_4
+                                     55 	.globl _P3_3
+                                     56 	.globl _P3_2
+                                     57 	.globl _P3_1
+                                     58 	.globl _P3_0
+                                     59 	.globl _EA
+                                     60 	.globl _ES
+                                     61 	.globl _ET1
+                                     62 	.globl _EX1
+                                     63 	.globl _ET0
+                                     64 	.globl _EX0
+                                     65 	.globl _P2_7
+                                     66 	.globl _P2_6
+                                     67 	.globl _P2_5
+                                     68 	.globl _P2_4
+                                     69 	.globl _P2_3
+                                     70 	.globl _P2_2
+                                     71 	.globl _P2_1
+                                     72 	.globl _P2_0
+                                     73 	.globl _SM0
+                                     74 	.globl _SM1
+                                     75 	.globl _SM2
+                                     76 	.globl _REN
+                                     77 	.globl _TB8
+                                     78 	.globl _RB8
+                                     79 	.globl _TI
+                                     80 	.globl _RI
+                                     81 	.globl _P1_7
+                                     82 	.globl _P1_6
+                                     83 	.globl _P1_5
+                                     84 	.globl _P1_4
+                                     85 	.globl _P1_3
+                                     86 	.globl _P1_2
+                                     87 	.globl _P1_1
+                                     88 	.globl _P1_0
+                                     89 	.globl _TF1
+                                     90 	.globl _TR1
+                                     91 	.globl _TF0
+                                     92 	.globl _TR0
+                                     93 	.globl _IE1
+                                     94 	.globl _IT1
+                                     95 	.globl _IE0
+                                     96 	.globl _IT0
+                                     97 	.globl _P0_7
+                                     98 	.globl _P0_6
+                                     99 	.globl _P0_5
+                                    100 	.globl _P0_4
+                                    101 	.globl _P0_3
+                                    102 	.globl _P0_2
+                                    103 	.globl _P0_1
+                                    104 	.globl _P0_0
+                                    105 	.globl _TH2
+                                    106 	.globl _TL2
+                                    107 	.globl _RCAP2H
+                                    108 	.globl _RCAP2L
+                                    109 	.globl _T2CON
+                                    110 	.globl _B
+                                    111 	.globl _ACC
+                                    112 	.globl _PSW
+                                    113 	.globl _IP
+                                    114 	.globl _P3
+                                    115 	.globl _IE
+                                    116 	.globl _P2
+                                    117 	.globl _SBUF
+                                    118 	.globl _SCON
+                                    119 	.globl _P1
+                                    120 	.globl _TH1
+                                    121 	.globl _TH0
+                                    122 	.globl _TL1
+                                    123 	.globl _TL0
+                                    124 	.globl _TMOD
+                                    125 	.globl _TCON
+                                    126 	.globl _PCON
+                                    127 	.globl _DPH
+                                    128 	.globl _DPL
+                                    129 	.globl _SP
+                                    130 	.globl _P0
+                                    131 	.globl _UART0_CHAR
+                                    132 	.globl _readStringWait_PARM_2
+                                    133 	.globl _readString_PARM_2
+                                    134 	.globl _sendString_PARM_2
+                                    135 	.globl _UART0_TXISR_function
+                                    136 	.globl _UART0_RXISR_function
+                                    137 	.globl _sendstatus
+                                    138 	.globl _start
+                                    139 	.globl _end
+                                    140 	.globl _InterruptUART
+                                    141 	.globl _sendNewLine
+                                    142 	.globl _initUart
+                                    143 	.globl _sendChar
+                                    144 	.globl _sendString
+                                    145 	.globl _readChar
+                                    146 	.globl _readString
+                                    147 	.globl _readStringWait
+                                    148 	.globl _setUartRXFun
+                                    149 	.globl _setUartTXFun
+                                    150 ;--------------------------------------------------------
+                                    151 ; special function registers
+                                    152 ;--------------------------------------------------------
+                                    153 	.area RSEG    (ABS,DATA)
+      000000                        154 	.org 0x0000
+                           000080   155 _P0	=	0x0080
+                           000081   156 _SP	=	0x0081
+                           000082   157 _DPL	=	0x0082
+                           000083   158 _DPH	=	0x0083
+                           000087   159 _PCON	=	0x0087
+                           000088   160 _TCON	=	0x0088
+                           000089   161 _TMOD	=	0x0089
+                           00008A   162 _TL0	=	0x008a
+                           00008B   163 _TL1	=	0x008b
+                           00008C   164 _TH0	=	0x008c
+                           00008D   165 _TH1	=	0x008d
+                           000090   166 _P1	=	0x0090
+                           000098   167 _SCON	=	0x0098
+                           000099   168 _SBUF	=	0x0099
+                           0000A0   169 _P2	=	0x00a0
+                           0000A8   170 _IE	=	0x00a8
+                           0000B0   171 _P3	=	0x00b0
+                           0000B8   172 _IP	=	0x00b8
+                           0000D0   173 _PSW	=	0x00d0
+                           0000E0   174 _ACC	=	0x00e0
+                           0000F0   175 _B	=	0x00f0
+                           0000C8   176 _T2CON	=	0x00c8
+                           0000CA   177 _RCAP2L	=	0x00ca
+                           0000CB   178 _RCAP2H	=	0x00cb
+                           0000CC   179 _TL2	=	0x00cc
+                           0000CD   180 _TH2	=	0x00cd
+                                    181 ;--------------------------------------------------------
+                                    182 ; special function bits
+                                    183 ;--------------------------------------------------------
+                                    184 	.area RSEG    (ABS,DATA)
+      000000                        185 	.org 0x0000
+                           000080   186 _P0_0	=	0x0080
+                           000081   187 _P0_1	=	0x0081
+                           000082   188 _P0_2	=	0x0082
+                           000083   189 _P0_3	=	0x0083
+                           000084   190 _P0_4	=	0x0084
+                           000085   191 _P0_5	=	0x0085
+                           000086   192 _P0_6	=	0x0086
+                           000087   193 _P0_7	=	0x0087
+                           000088   194 _IT0	=	0x0088
+                           000089   195 _IE0	=	0x0089
+                           00008A   196 _IT1	=	0x008a
+                           00008B   197 _IE1	=	0x008b
+                           00008C   198 _TR0	=	0x008c
+                           00008D   199 _TF0	=	0x008d
+                           00008E   200 _TR1	=	0x008e
+                           00008F   201 _TF1	=	0x008f
+                           000090   202 _P1_0	=	0x0090
+                           000091   203 _P1_1	=	0x0091
+                           000092   204 _P1_2	=	0x0092
+                           000093   205 _P1_3	=	0x0093
+                           000094   206 _P1_4	=	0x0094
+                           000095   207 _P1_5	=	0x0095
+                           000096   208 _P1_6	=	0x0096
+                           000097   209 _P1_7	=	0x0097
+                           000098   210 _RI	=	0x0098
+                           000099   211 _TI	=	0x0099
+                           00009A   212 _RB8	=	0x009a
+                           00009B   213 _TB8	=	0x009b
+                           00009C   214 _REN	=	0x009c
+                           00009D   215 _SM2	=	0x009d
+                           00009E   216 _SM1	=	0x009e
+                           00009F   217 _SM0	=	0x009f
+                           0000A0   218 _P2_0	=	0x00a0
+                           0000A1   219 _P2_1	=	0x00a1
+                           0000A2   220 _P2_2	=	0x00a2
+                           0000A3   221 _P2_3	=	0x00a3
+                           0000A4   222 _P2_4	=	0x00a4
+                           0000A5   223 _P2_5	=	0x00a5
+                           0000A6   224 _P2_6	=	0x00a6
+                           0000A7   225 _P2_7	=	0x00a7
+                           0000A8   226 _EX0	=	0x00a8
+                           0000A9   227 _ET0	=	0x00a9
+                           0000AA   228 _EX1	=	0x00aa
+                           0000AB   229 _ET1	=	0x00ab
+                           0000AC   230 _ES	=	0x00ac
+                           0000AF   231 _EA	=	0x00af
+                           0000B0   232 _P3_0	=	0x00b0
+                           0000B1   233 _P3_1	=	0x00b1
+                           0000B2   234 _P3_2	=	0x00b2
+                           0000B3   235 _P3_3	=	0x00b3
+                           0000B4   236 _P3_4	=	0x00b4
+                           0000B5   237 _P3_5	=	0x00b5
+                           0000B6   238 _P3_6	=	0x00b6
+                           0000B7   239 _P3_7	=	0x00b7
+                           0000B0   240 _RXD	=	0x00b0
+                           0000B1   241 _TXD	=	0x00b1
+                           0000B2   242 _INT0	=	0x00b2
+                           0000B3   243 _INT1	=	0x00b3
+                           0000B4   244 _T0	=	0x00b4
+                           0000B5   245 _T1	=	0x00b5
+                           0000B6   246 _WR	=	0x00b6
+                           0000B7   247 _RD	=	0x00b7
+                           0000B8   248 _PX0	=	0x00b8
+                           0000B9   249 _PT0	=	0x00b9
+                           0000BA   250 _PX1	=	0x00ba
+                           0000BB   251 _PT1	=	0x00bb
+                           0000BC   252 _PS	=	0x00bc
+                           0000D0   253 _P	=	0x00d0
+                           0000D1   254 _F1	=	0x00d1
+                           0000D2   255 _OV	=	0x00d2
+                           0000D3   256 _RS0	=	0x00d3
+                           0000D4   257 _RS1	=	0x00d4
+                           0000D5   258 _F0	=	0x00d5
+                           0000D6   259 _AC	=	0x00d6
+                           0000D7   260 _CY	=	0x00d7
+                           0000AD   261 _ET2	=	0x00ad
+                           0000BD   262 _PT2	=	0x00bd
+                           0000C8   263 _T2CON_0	=	0x00c8
+                           0000C9   264 _T2CON_1	=	0x00c9
+                           0000CA   265 _T2CON_2	=	0x00ca
+                           0000CB   266 _T2CON_3	=	0x00cb
+                           0000CC   267 _T2CON_4	=	0x00cc
+                           0000CD   268 _T2CON_5	=	0x00cd
+                           0000CE   269 _T2CON_6	=	0x00ce
+                           0000CF   270 _T2CON_7	=	0x00cf
+                           0000C8   271 _CP_RL2	=	0x00c8
+                           0000C9   272 _C_T2	=	0x00c9
+                           0000CA   273 _TR2	=	0x00ca
+                           0000CB   274 _EXEN2	=	0x00cb
+                           0000CC   275 _TCLK	=	0x00cc
+                           0000CD   276 _RCLK	=	0x00cd
+                           0000CE   277 _EXF2	=	0x00ce
+                           0000CF   278 _TF2	=	0x00cf
+                                    279 ;--------------------------------------------------------
+                                    280 ; overlayable register banks
+                                    281 ;--------------------------------------------------------
+                                    282 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        283 	.ds 8
+                                    284 ;--------------------------------------------------------
+                                    285 ; overlayable bit register bank
+                                    286 ;--------------------------------------------------------
+                                    287 	.area BIT_BANK	(REL,OVR,DATA)
+      000000                        288 bits:
+      000000                        289 	.ds 1
+                           008000   290 	b0 = bits[0]
+                           008100   291 	b1 = bits[1]
+                           008200   292 	b2 = bits[2]
+                           008300   293 	b3 = bits[3]
+                           008400   294 	b4 = bits[4]
+                           008500   295 	b5 = bits[5]
+                           008600   296 	b6 = bits[6]
+                           008700   297 	b7 = bits[7]
+                                    298 ;--------------------------------------------------------
+                                    299 ; internal ram data
+                                    300 ;--------------------------------------------------------
+                                    301 	.area DSEG    (DATA)
+      000000                        302 _end::
+      000000                        303 	.ds 2
+      000002                        304 _start::
+      000002                        305 	.ds 2
+      000004                        306 _sendstatus::
+      000004                        307 	.ds 2
+      000006                        308 _UART0_RXISR_function::
+      000006                        309 	.ds 2
+      000008                        310 _UART0_TXISR_function::
+      000008                        311 	.ds 2
+      00000A                        312 _sendString_PARM_2:
+      00000A                        313 	.ds 2
+      00000C                        314 _readString_PARM_2:
+      00000C                        315 	.ds 2
+      00000E                        316 _readString_str_1_28:
+      00000E                        317 	.ds 3
+      000011                        318 _readStringWait_PARM_2:
+      000011                        319 	.ds 2
+      000013                        320 _readStringWait_str_1_34:
+      000013                        321 	.ds 3
+                                    322 ;--------------------------------------------------------
+                                    323 ; overlayable items in internal ram 
+                                    324 ;--------------------------------------------------------
+                                    325 	.area	OSEG    (OVR,DATA)
+                                    326 	.area	OSEG    (OVR,DATA)
+                                    327 	.area	OSEG    (OVR,DATA)
+                                    328 	.area	OSEG    (OVR,DATA)
+                                    329 ;--------------------------------------------------------
+                                    330 ; indirectly addressable internal ram data
+                                    331 ;--------------------------------------------------------
+                                    332 	.area ISEG    (DATA)
+                                    333 ;--------------------------------------------------------
+                                    334 ; absolute internal ram data
+                                    335 ;--------------------------------------------------------
+                                    336 	.area IABS    (ABS,DATA)
+                                    337 	.area IABS    (ABS,DATA)
+                                    338 ;--------------------------------------------------------
+                                    339 ; bit data
+                                    340 ;--------------------------------------------------------
+                                    341 	.area BSEG    (BIT)
+                                    342 ;--------------------------------------------------------
+                                    343 ; paged external ram data
+                                    344 ;--------------------------------------------------------
+                                    345 	.area PSEG    (PAG,XDATA)
+                                    346 ;--------------------------------------------------------
+                                    347 ; external ram data
+                                    348 ;--------------------------------------------------------
+                                    349 	.area XSEG    (XDATA)
+      000000                        350 _UART0_CHAR::
+      000000                        351 	.ds 50
+                                    352 ;--------------------------------------------------------
+                                    353 ; absolute external ram data
+                                    354 ;--------------------------------------------------------
+                                    355 	.area XABS    (ABS,XDATA)
+                                    356 ;--------------------------------------------------------
+                                    357 ; external initialized ram data
+                                    358 ;--------------------------------------------------------
+                                    359 	.area XISEG   (XDATA)
+                                    360 	.area HOME    (CODE)
+                                    361 	.area GSINIT0 (CODE)
+                                    362 	.area GSINIT1 (CODE)
+                                    363 	.area GSINIT2 (CODE)
+                                    364 	.area GSINIT3 (CODE)
+                                    365 	.area GSINIT4 (CODE)
+                                    366 	.area GSINIT5 (CODE)
+                                    367 	.area GSINIT  (CODE)
+                                    368 	.area GSFINAL (CODE)
+                                    369 	.area CSEG    (CODE)
+                                    370 ;--------------------------------------------------------
+                                    371 ; global & static initialisations
+                                    372 ;--------------------------------------------------------
+                                    373 	.area HOME    (CODE)
+                                    374 	.area GSINIT  (CODE)
+                                    375 	.area GSFINAL (CODE)
+                                    376 	.area GSINIT  (CODE)
+                                    377 ;	UART/UART.c:5: int sendstatus = 0;                //发送状态
+      000000 E4               [12]  378 	clr	a
+      000001 F5*04            [12]  379 	mov	_sendstatus,a
+      000003 F5*05            [12]  380 	mov	(_sendstatus + 1),a
+                                    381 ;--------------------------------------------------------
+                                    382 ; Home
+                                    383 ;--------------------------------------------------------
+                                    384 	.area HOME    (CODE)
+                                    385 	.area HOME    (CODE)
+                                    386 ;--------------------------------------------------------
+                                    387 ; code
+                                    388 ;--------------------------------------------------------
+                                    389 	.area CSEG    (CODE)
+                                    390 ;------------------------------------------------------------
+                                    391 ;Allocation info for local variables in function 'InterruptUART'
+                                    392 ;------------------------------------------------------------
+                                    393 ;	UART/UART.c:15: void InterruptUART() __interrupt 4
+                                    394 ;	-----------------------------------------
+                                    395 ;	 function InterruptUART
+                                    396 ;	-----------------------------------------
+      000000                        397 _InterruptUART:
+                           000007   398 	ar7 = 0x07
+                           000006   399 	ar6 = 0x06
+                           000005   400 	ar5 = 0x05
+                           000004   401 	ar4 = 0x04
+                           000003   402 	ar3 = 0x03
+                           000002   403 	ar2 = 0x02
+                           000001   404 	ar1 = 0x01
+                           000000   405 	ar0 = 0x00
+      000000 C0*00            [24]  406 	push	bits
+      000002 C0 E0            [24]  407 	push	acc
+      000004 C0 F0            [24]  408 	push	b
+      000006 C0 82            [24]  409 	push	dpl
+      000008 C0 83            [24]  410 	push	dph
+      00000A C0 07            [24]  411 	push	(0+7)
+      00000C C0 06            [24]  412 	push	(0+6)
+      00000E C0 05            [24]  413 	push	(0+5)
+      000010 C0 04            [24]  414 	push	(0+4)
+      000012 C0 03            [24]  415 	push	(0+3)
+      000014 C0 02            [24]  416 	push	(0+2)
+      000016 C0 01            [24]  417 	push	(0+1)
+      000018 C0 00            [24]  418 	push	(0+0)
+      00001A C0 D0            [24]  419 	push	psw
+      00001C 75 D0 00         [24]  420 	mov	psw,#0x00
+                                    421 ;	UART/UART.c:17: if(RI)  //接收到新字符
+                                    422 ;	UART/UART.c:19: RI = 0;
+      00001F 10 98 02         [24]  423 	jbc	_RI,00128$
+      000022 80 3A            [24]  424 	sjmp	00106$
+      000024                        425 00128$:
+                                    426 ;	UART/UART.c:20: if(end >= RX_BUFFER_SIZE )
+      000024 C3               [12]  427 	clr	c
+      000025 E5*00            [12]  428 	mov	a,_end
+      000027 94 32            [12]  429 	subb	a,#0x32
+      000029 E5*01            [12]  430 	mov	a,(_end + 1)
+      00002B 64 80            [12]  431 	xrl	a,#0x80
+      00002D 94 80            [12]  432 	subb	a,#0x80
+      00002F 40 05            [24]  433 	jc	00102$
+                                    434 ;	UART/UART.c:21: end = 0;
+      000031 E4               [12]  435 	clr	a
+      000032 F5*00            [12]  436 	mov	_end,a
+      000034 F5*01            [12]  437 	mov	(_end + 1),a
+      000036                        438 00102$:
+                                    439 ;	UART/UART.c:22: UART0_CHAR[end++] = SBUF;
+      000036 AE*00            [24]  440 	mov	r6,_end
+      000038 AF*01            [24]  441 	mov	r7,(_end + 1)
+      00003A 05*00            [12]  442 	inc	_end
+      00003C E4               [12]  443 	clr	a
+      00003D B5*00 02         [24]  444 	cjne	a,_end,00130$
+      000040 05*01            [12]  445 	inc	(_end + 1)
+      000042                        446 00130$:
+      000042 EE               [12]  447 	mov	a,r6
+      000043 24r00            [12]  448 	add	a,#_UART0_CHAR
+      000045 F5 82            [12]  449 	mov	dpl,a
+      000047 EF               [12]  450 	mov	a,r7
+      000048 34s00            [12]  451 	addc	a,#(_UART0_CHAR >> 8)
+      00004A F5 83            [12]  452 	mov	dph,a
+      00004C E5 99            [12]  453 	mov	a,_SBUF
+      00004E F0               [24]  454 	movx	@dptr,a
+                                    455 ;	UART/UART.c:23: if( UART0_RXISR_function != 0)
+      00004F E5*06            [12]  456 	mov	a,_UART0_RXISR_function
+      000051 45*07            [12]  457 	orl	a,(_UART0_RXISR_function + 1)
+      000053 60 09            [24]  458 	jz	00106$
+                                    459 ;	UART/UART.c:25: UART0_RXISR_function();
+      000055 85*06 82         [24]  460 	mov	dpl,_UART0_RXISR_function
+      000058 85*07 83         [24]  461 	mov	dph,(_UART0_RXISR_function + 1)
+      00005B 12r00r00         [24]  462 	lcall	__sdcc_call_dptr
+      00005E                        463 00106$:
+                                    464 ;	UART/UART.c:29: if(TI)  //字节发送完毕
+                                    465 ;	UART/UART.c:31: TI = 0;
+      00005E 10 99 02         [24]  466 	jbc	_TI,00132$
+      000061 80 15            [24]  467 	sjmp	00111$
+      000063                        468 00132$:
+                                    469 ;	UART/UART.c:32: sendstatus = 1;
+      000063 75*04 01         [24]  470 	mov	_sendstatus,#0x01
+      000066 75*05 00         [24]  471 	mov	(_sendstatus + 1),#0x00
+                                    472 ;	UART/UART.c:33: if(UART0_TXISR_function != 0 )
+      000069 E5*08            [12]  473 	mov	a,_UART0_TXISR_function
+      00006B 45*09            [12]  474 	orl	a,(_UART0_TXISR_function + 1)
+      00006D 60 09            [24]  475 	jz	00111$
+                                    476 ;	UART/UART.c:35: UART0_TXISR_function();
+      00006F 85*08 82         [24]  477 	mov	dpl,_UART0_TXISR_function
+      000072 85*09 83         [24]  478 	mov	dph,(_UART0_TXISR_function + 1)
+      000075 12r00r00         [24]  479 	lcall	__sdcc_call_dptr
+      000078                        480 00111$:
+      000078 D0 D0            [24]  481 	pop	psw
+      00007A D0 00            [24]  482 	pop	(0+0)
+      00007C D0 01            [24]  483 	pop	(0+1)
+      00007E D0 02            [24]  484 	pop	(0+2)
+      000080 D0 03            [24]  485 	pop	(0+3)
+      000082 D0 04            [24]  486 	pop	(0+4)
+      000084 D0 05            [24]  487 	pop	(0+5)
+      000086 D0 06            [24]  488 	pop	(0+6)
+      000088 D0 07            [24]  489 	pop	(0+7)
+      00008A D0 83            [24]  490 	pop	dph
+      00008C D0 82            [24]  491 	pop	dpl
+      00008E D0 F0            [24]  492 	pop	b
+      000090 D0 E0            [24]  493 	pop	acc
+      000092 D0*00            [24]  494 	pop	bits
+      000094 32               [24]  495 	reti
+                                    496 ;------------------------------------------------------------
+                                    497 ;Allocation info for local variables in function 'sendNewLine'
+                                    498 ;------------------------------------------------------------
+                                    499 ;	UART/UART.c:47: void sendNewLine()
+                                    500 ;	-----------------------------------------
+                                    501 ;	 function sendNewLine
+                                    502 ;	-----------------------------------------
+      000095                        503 _sendNewLine:
+                                    504 ;	UART/UART.c:49: sendString("\r\n",2);
+      000095 75*0A 02         [24]  505 	mov	_sendString_PARM_2,#0x02
+      000098 75*0B 00         [24]  506 	mov	(_sendString_PARM_2 + 1),#0x00
+      00009B 90r00r00         [24]  507 	mov	dptr,#___str_0
+      00009E 75 F0 80         [24]  508 	mov	b,#0x80
+      0000A1 02r00rE6         [24]  509 	ljmp	_sendString
+                                    510 ;------------------------------------------------------------
+                                    511 ;Allocation info for local variables in function 'initUart'
+                                    512 ;------------------------------------------------------------
+                                    513 ;baud                      Allocated to registers r6 r7 
+                                    514 ;------------------------------------------------------------
+                                    515 ;	UART/UART.c:58: void initUart(unsigned int baud)
+                                    516 ;	-----------------------------------------
+                                    517 ;	 function initUart
+                                    518 ;	-----------------------------------------
+      0000A4                        519 _initUart:
+      0000A4 AE 82            [24]  520 	mov	r6,dpl
+      0000A6 AF 83            [24]  521 	mov	r7,dph
+                                    522 ;	UART/UART.c:60: EA = 1;
+      0000A8 D2 AF            [12]  523 	setb	_EA
+                                    524 ;	UART/UART.c:61: SCON = 0x50;
+      0000AA 75 98 50         [24]  525 	mov	_SCON,#0x50
+                                    526 ;	UART/UART.c:62: TMOD &= 0x0F;
+      0000AD 53 89 0F         [24]  527 	anl	_TMOD,#0x0F
+                                    528 ;	UART/UART.c:63: TMOD |= 0x20; //配置T1为模式2
+      0000B0 43 89 20         [24]  529 	orl	_TMOD,#0x20
+                                    530 ;	UART/UART.c:64: TH1 = 256-(11059200/12/32)/baud;
+      0000B3 8E*00            [24]  531 	mov	__divslong_PARM_2,r6
+      0000B5 8F*01            [24]  532 	mov	(__divslong_PARM_2 + 1),r7
+      0000B7 75*02 00         [24]  533 	mov	(__divslong_PARM_2 + 2),#0x00
+      0000BA 75*03 00         [24]  534 	mov	(__divslong_PARM_2 + 3),#0x00
+      0000BD 90 70 80         [24]  535 	mov	dptr,#0x7080
+      0000C0 E4               [12]  536 	clr	a
+      0000C1 F5 F0            [12]  537 	mov	b,a
+      0000C3 12r00r00         [24]  538 	lcall	__divslong
+      0000C6 AC 82            [24]  539 	mov	r4,dpl
+      0000C8 C3               [12]  540 	clr	c
+      0000C9 E4               [12]  541 	clr	a
+      0000CA 9C               [12]  542 	subb	a,r4
+      0000CB F5 8D            [12]  543 	mov	_TH1,a
+                                    544 ;	UART/UART.c:65: TL1 = TH1; //初始值等于重载值
+      0000CD 85 8D 8B         [24]  545 	mov	_TL1,_TH1
+                                    546 ;	UART/UART.c:66: ET1 = 0;   //禁止T1的中断
+      0000D0 C2 AB            [12]  547 	clr	_ET1
+                                    548 ;	UART/UART.c:67: ES = 1;    //使能串口中断
+      0000D2 D2 AC            [12]  549 	setb	_ES
+                                    550 ;	UART/UART.c:68: TR1 = 1;   //启动T1
+      0000D4 D2 8E            [12]  551 	setb	_TR1
+      0000D6 22               [24]  552 	ret
+                                    553 ;------------------------------------------------------------
+                                    554 ;Allocation info for local variables in function 'sendChar'
+                                    555 ;------------------------------------------------------------
+                                    556 ;ch                        Allocated to registers 
+                                    557 ;------------------------------------------------------------
+                                    558 ;	UART/UART.c:77: void sendChar(char ch)
+                                    559 ;	-----------------------------------------
+                                    560 ;	 function sendChar
+                                    561 ;	-----------------------------------------
+      0000D7                        562 _sendChar:
+      0000D7 85 82 99         [24]  563 	mov	_SBUF,dpl
+                                    564 ;	UART/UART.c:80: while( sendstatus == 0 ); //在发送成功时,中断会将sendstatus置0,
+      0000DA                        565 00101$:
+      0000DA E5*04            [12]  566 	mov	a,_sendstatus
+      0000DC 45*05            [12]  567 	orl	a,(_sendstatus + 1)
+      0000DE 60 FA            [24]  568 	jz	00101$
+                                    569 ;	UART/UART.c:81: sendstatus = 0;
+      0000E0 E4               [12]  570 	clr	a
+      0000E1 F5*04            [12]  571 	mov	_sendstatus,a
+      0000E3 F5*05            [12]  572 	mov	(_sendstatus + 1),a
+      0000E5 22               [24]  573 	ret
+                                    574 ;------------------------------------------------------------
+                                    575 ;Allocation info for local variables in function 'sendString'
+                                    576 ;------------------------------------------------------------
+                                    577 ;len                       Allocated with name '_sendString_PARM_2'
+                                    578 ;str                       Allocated to registers r5 r6 r7 
+                                    579 ;i                         Allocated to registers r3 r4 
+                                    580 ;------------------------------------------------------------
+                                    581 ;	UART/UART.c:91: void sendString(char * str, int len)
+                                    582 ;	-----------------------------------------
+                                    583 ;	 function sendString
+                                    584 ;	-----------------------------------------
+      0000E6                        585 _sendString:
+      0000E6 AD 82            [24]  586 	mov	r5,dpl
+      0000E8 AE 83            [24]  587 	mov	r6,dph
+      0000EA AF F0            [24]  588 	mov	r7,b
+                                    589 ;	UART/UART.c:94: for(i = 0; i < len; i++)
+      0000EC 7B 00            [12]  590 	mov	r3,#0x00
+      0000EE 7C 00            [12]  591 	mov	r4,#0x00
+      0000F0                        592 00103$:
+      0000F0 C3               [12]  593 	clr	c
+      0000F1 EB               [12]  594 	mov	a,r3
+      0000F2 95*0A            [12]  595 	subb	a,_sendString_PARM_2
+      0000F4 EC               [12]  596 	mov	a,r4
+      0000F5 64 80            [12]  597 	xrl	a,#0x80
+      0000F7 85*0B F0         [24]  598 	mov	b,(_sendString_PARM_2 + 1)
+      0000FA 63 F0 80         [24]  599 	xrl	b,#0x80
+      0000FD 95 F0            [12]  600 	subb	a,b
+      0000FF 50 31            [24]  601 	jnc	00105$
+                                    602 ;	UART/UART.c:96: sendChar( str[i] );
+      000101 EB               [12]  603 	mov	a,r3
+      000102 2D               [12]  604 	add	a,r5
+      000103 F8               [12]  605 	mov	r0,a
+      000104 EC               [12]  606 	mov	a,r4
+      000105 3E               [12]  607 	addc	a,r6
+      000106 F9               [12]  608 	mov	r1,a
+      000107 8F 02            [24]  609 	mov	ar2,r7
+      000109 88 82            [24]  610 	mov	dpl,r0
+      00010B 89 83            [24]  611 	mov	dph,r1
+      00010D 8A F0            [24]  612 	mov	b,r2
+      00010F 12r00r00         [24]  613 	lcall	__gptrget
+      000112 F5 82            [12]  614 	mov	dpl,a
+      000114 C0 07            [24]  615 	push	ar7
+      000116 C0 06            [24]  616 	push	ar6
+      000118 C0 05            [24]  617 	push	ar5
+      00011A C0 04            [24]  618 	push	ar4
+      00011C C0 03            [24]  619 	push	ar3
+      00011E 12r00rD7         [24]  620 	lcall	_sendChar
+      000121 D0 03            [24]  621 	pop	ar3
+      000123 D0 04            [24]  622 	pop	ar4
+      000125 D0 05            [24]  623 	pop	ar5
+      000127 D0 06            [24]  624 	pop	ar6
+      000129 D0 07            [24]  625 	pop	ar7
+                                    626 ;	UART/UART.c:94: for(i = 0; i < len; i++)
+      00012B 0B               [12]  627 	inc	r3
+      00012C BB 00 C1         [24]  628 	cjne	r3,#0x00,00103$
+      00012F 0C               [12]  629 	inc	r4
+      000130 80 BE            [24]  630 	sjmp	00103$
+      000132                        631 00105$:
+      000132 22               [24]  632 	ret
+                                    633 ;------------------------------------------------------------
+                                    634 ;Allocation info for local variables in function 'readChar'
+                                    635 ;------------------------------------------------------------
+                                    636 ;ch                        Allocated to registers r5 
+                                    637 ;------------------------------------------------------------
+                                    638 ;	UART/UART.c:106: char readChar()
+                                    639 ;	-----------------------------------------
+                                    640 ;	 function readChar
+                                    641 ;	-----------------------------------------
+      000133                        642 _readChar:
+                                    643 ;	UART/UART.c:108: if(start != end)
+      000133 E5*00            [12]  644 	mov	a,_end
+      000135 B5*02 07         [24]  645 	cjne	a,_start,00114$
+      000138 E5*01            [12]  646 	mov	a,(_end + 1)
+      00013A B5*03 02         [24]  647 	cjne	a,(_start + 1),00114$
+      00013D 80 32            [24]  648 	sjmp	00104$
+      00013F                        649 00114$:
+                                    650 ;	UART/UART.c:110: char ch = UART0_CHAR[start];
+      00013F E5*02            [12]  651 	mov	a,_start
+      000141 24r00            [12]  652 	add	a,#_UART0_CHAR
+      000143 FE               [12]  653 	mov	r6,a
+      000144 E5*03            [12]  654 	mov	a,(_start + 1)
+      000146 34s00            [12]  655 	addc	a,#(_UART0_CHAR >> 8)
+      000148 FF               [12]  656 	mov	r7,a
+      000149 8E 82            [24]  657 	mov	dpl,r6
+      00014B 8F 83            [24]  658 	mov	dph,r7
+      00014D E0               [24]  659 	movx	a,@dptr
+      00014E FD               [12]  660 	mov	r5,a
+                                    661 ;	UART/UART.c:111: UART0_CHAR[start] = 0;
+      00014F 8E 82            [24]  662 	mov	dpl,r6
+      000151 8F 83            [24]  663 	mov	dph,r7
+      000153 E4               [12]  664 	clr	a
+      000154 F0               [24]  665 	movx	@dptr,a
+                                    666 ;	UART/UART.c:112: start++;
+      000155 05*02            [12]  667 	inc	_start
+                                    668 ;	genFromRTrack removed	clr	a
+      000157 B5*02 02         [24]  669 	cjne	a,_start,00115$
+      00015A 05*03            [12]  670 	inc	(_start + 1)
+      00015C                        671 00115$:
+                                    672 ;	UART/UART.c:113: if(start >= RX_BUFFER_SIZE)
+      00015C C3               [12]  673 	clr	c
+      00015D E5*02            [12]  674 	mov	a,_start
+      00015F 94 32            [12]  675 	subb	a,#0x32
+      000161 E5*03            [12]  676 	mov	a,(_start + 1)
+      000163 64 80            [12]  677 	xrl	a,#0x80
+      000165 94 80            [12]  678 	subb	a,#0x80
+      000167 40 05            [24]  679 	jc	00102$
+                                    680 ;	UART/UART.c:115: start = 0;
+      000169 E4               [12]  681 	clr	a
+      00016A F5*02            [12]  682 	mov	_start,a
+      00016C F5*03            [12]  683 	mov	(_start + 1),a
+      00016E                        684 00102$:
+                                    685 ;	UART/UART.c:118: return ch;
+      00016E 8D 82            [24]  686 	mov	dpl,r5
+      000170 22               [24]  687 	ret
+      000171                        688 00104$:
+                                    689 ;	UART/UART.c:122: return 0;
+      000171 75 82 00         [24]  690 	mov	dpl,#0x00
+      000174 22               [24]  691 	ret
+                                    692 ;------------------------------------------------------------
+                                    693 ;Allocation info for local variables in function 'readString'
+                                    694 ;------------------------------------------------------------
+                                    695 ;len                       Allocated with name '_readString_PARM_2'
+                                    696 ;str                       Allocated with name '_readString_str_1_28'
+                                    697 ;ch                        Allocated to registers r4 
+                                    698 ;i                         Allocated to registers r2 r3 
+                                    699 ;------------------------------------------------------------
+                                    700 ;	UART/UART.c:133: int readString(char * str, int len)
+                                    701 ;	-----------------------------------------
+                                    702 ;	 function readString
+                                    703 ;	-----------------------------------------
+      000175                        704 _readString:
+      000175 85 82*0E         [24]  705 	mov	_readString_str_1_28,dpl
+      000178 85 83*0F         [24]  706 	mov	(_readString_str_1_28 + 1),dph
+      00017B 85 F0*10         [24]  707 	mov	(_readString_str_1_28 + 2),b
+                                    708 ;	UART/UART.c:137: if(len <= 0)
+      00017E C3               [12]  709 	clr	c
+      00017F E4               [12]  710 	clr	a
+      000180 95*0C            [12]  711 	subb	a,_readString_PARM_2
+      000182 74 80            [12]  712 	mov	a,#(0x00 ^ 0x80)
+      000184 85*0D F0         [24]  713 	mov	b,(_readString_PARM_2 + 1)
+      000187 63 F0 80         [24]  714 	xrl	b,#0x80
+      00018A 95 F0            [12]  715 	subb	a,b
+      00018C 40 04            [24]  716 	jc	00102$
+                                    717 ;	UART/UART.c:139: return -1;
+      00018E 90 FF FF         [24]  718 	mov	dptr,#0xFFFF
+      000191 22               [24]  719 	ret
+      000192                        720 00102$:
+                                    721 ;	UART/UART.c:141: ch = readChar();
+      000192 12r01r33         [24]  722 	lcall	_readChar
+      000195 AC 82            [24]  723 	mov	r4,dpl
+                                    724 ;	UART/UART.c:142: while( ch != 0 )
+      000197 7A 00            [12]  725 	mov	r2,#0x00
+      000199 7B 00            [12]  726 	mov	r3,#0x00
+      00019B                        727 00106$:
+      00019B EC               [12]  728 	mov	a,r4
+      00019C 60 39            [24]  729 	jz	00108$
+                                    730 ;	UART/UART.c:144: *(str+i) = ch;
+      00019E EA               [12]  731 	mov	a,r2
+      00019F 25*0E            [12]  732 	add	a,_readString_str_1_28
+      0001A1 F8               [12]  733 	mov	r0,a
+      0001A2 EB               [12]  734 	mov	a,r3
+      0001A3 35*0F            [12]  735 	addc	a,(_readString_str_1_28 + 1)
+      0001A5 F9               [12]  736 	mov	r1,a
+      0001A6 AF*10            [24]  737 	mov	r7,(_readString_str_1_28 + 2)
+      0001A8 88 82            [24]  738 	mov	dpl,r0
+      0001AA 89 83            [24]  739 	mov	dph,r1
+      0001AC 8F F0            [24]  740 	mov	b,r7
+      0001AE EC               [12]  741 	mov	a,r4
+      0001AF 12r00r00         [24]  742 	lcall	__gptrput
+                                    743 ;	UART/UART.c:145: i++;
+      0001B2 0A               [12]  744 	inc	r2
+      0001B3 BA 00 01         [24]  745 	cjne	r2,#0x00,00126$
+      0001B6 0B               [12]  746 	inc	r3
+      0001B7                        747 00126$:
+                                    748 ;	UART/UART.c:146: if( i < len )
+      0001B7 C3               [12]  749 	clr	c
+      0001B8 EA               [12]  750 	mov	a,r2
+      0001B9 95*0C            [12]  751 	subb	a,_readString_PARM_2
+      0001BB EB               [12]  752 	mov	a,r3
+      0001BC 64 80            [12]  753 	xrl	a,#0x80
+      0001BE 85*0D F0         [24]  754 	mov	b,(_readString_PARM_2 + 1)
+      0001C1 63 F0 80         [24]  755 	xrl	b,#0x80
+      0001C4 95 F0            [12]  756 	subb	a,b
+      0001C6 50 0F            [24]  757 	jnc	00108$
+                                    758 ;	UART/UART.c:148: ch = readChar();
+      0001C8 C0 03            [24]  759 	push	ar3
+      0001CA C0 02            [24]  760 	push	ar2
+      0001CC 12r01r33         [24]  761 	lcall	_readChar
+      0001CF AC 82            [24]  762 	mov	r4,dpl
+      0001D1 D0 02            [24]  763 	pop	ar2
+      0001D3 D0 03            [24]  764 	pop	ar3
+                                    765 ;	UART/UART.c:152: break;
+      0001D5 80 C4            [24]  766 	sjmp	00106$
+      0001D7                        767 00108$:
+                                    768 ;	UART/UART.c:155: return i;
+      0001D7 8A 82            [24]  769 	mov	dpl,r2
+      0001D9 8B 83            [24]  770 	mov	dph,r3
+      0001DB 22               [24]  771 	ret
+                                    772 ;------------------------------------------------------------
+                                    773 ;Allocation info for local variables in function 'readStringWait'
+                                    774 ;------------------------------------------------------------
+                                    775 ;len                       Allocated with name '_readStringWait_PARM_2'
+                                    776 ;str                       Allocated with name '_readStringWait_str_1_34'
+                                    777 ;i                         Allocated to registers r3 r4 
+                                    778 ;------------------------------------------------------------
+                                    779 ;	UART/UART.c:166: void readStringWait(char * str, int len)
+                                    780 ;	-----------------------------------------
+                                    781 ;	 function readStringWait
+                                    782 ;	-----------------------------------------
+      0001DC                        783 _readStringWait:
+      0001DC 85 82*13         [24]  784 	mov	_readStringWait_str_1_34,dpl
+      0001DF 85 83*14         [24]  785 	mov	(_readStringWait_str_1_34 + 1),dph
+      0001E2 85 F0*15         [24]  786 	mov	(_readStringWait_str_1_34 + 2),b
+                                    787 ;	UART/UART.c:168: unsigned int i = 0;
+      0001E5 7B 00            [12]  788 	mov	r3,#0x00
+      0001E7 7C 00            [12]  789 	mov	r4,#0x00
+                                    790 ;	UART/UART.c:169: while(i < len)
+      0001E9                        791 00101$:
+      0001E9 A9*11            [24]  792 	mov	r1,_readStringWait_PARM_2
+      0001EB AA*12            [24]  793 	mov	r2,(_readStringWait_PARM_2 + 1)
+      0001ED C3               [12]  794 	clr	c
+      0001EE EB               [12]  795 	mov	a,r3
+      0001EF 99               [12]  796 	subb	a,r1
+      0001F0 EC               [12]  797 	mov	a,r4
+      0001F1 9A               [12]  798 	subb	a,r2
+      0001F2 50 30            [24]  799 	jnc	00104$
+                                    800 ;	UART/UART.c:171: i += readString(str+i,len-i);
+      0001F4 EB               [12]  801 	mov	a,r3
+      0001F5 25*13            [12]  802 	add	a,_readStringWait_str_1_34
+      0001F7 F8               [12]  803 	mov	r0,a
+      0001F8 EC               [12]  804 	mov	a,r4
+      0001F9 35*14            [12]  805 	addc	a,(_readStringWait_str_1_34 + 1)
+      0001FB FE               [12]  806 	mov	r6,a
+      0001FC AF*15            [24]  807 	mov	r7,(_readStringWait_str_1_34 + 2)
+      0001FE E9               [12]  808 	mov	a,r1
+      0001FF C3               [12]  809 	clr	c
+      000200 9B               [12]  810 	subb	a,r3
+      000201 F5*0C            [12]  811 	mov	_readString_PARM_2,a
+      000203 EA               [12]  812 	mov	a,r2
+      000204 9C               [12]  813 	subb	a,r4
+      000205 F5*0D            [12]  814 	mov	(_readString_PARM_2 + 1),a
+      000207 88 82            [24]  815 	mov	dpl,r0
+      000209 8E 83            [24]  816 	mov	dph,r6
+      00020B 8F F0            [24]  817 	mov	b,r7
+      00020D C0 04            [24]  818 	push	ar4
+      00020F C0 03            [24]  819 	push	ar3
+      000211 12r01r75         [24]  820 	lcall	_readString
+      000214 AE 82            [24]  821 	mov	r6,dpl
+      000216 AF 83            [24]  822 	mov	r7,dph
+      000218 D0 03            [24]  823 	pop	ar3
+      00021A D0 04            [24]  824 	pop	ar4
+      00021C EE               [12]  825 	mov	a,r6
+      00021D 2B               [12]  826 	add	a,r3
+      00021E FB               [12]  827 	mov	r3,a
+      00021F EF               [12]  828 	mov	a,r7
+      000220 3C               [12]  829 	addc	a,r4
+      000221 FC               [12]  830 	mov	r4,a
+      000222 80 C5            [24]  831 	sjmp	00101$
+      000224                        832 00104$:
+      000224 22               [24]  833 	ret
+                                    834 ;------------------------------------------------------------
+                                    835 ;Allocation info for local variables in function 'setUartRXFun'
+                                    836 ;------------------------------------------------------------
+                                    837 ;inUART0_RXISR_function    Allocated to registers 
+                                    838 ;------------------------------------------------------------
+                                    839 ;	UART/UART.c:181: void setUartRXFun( void (*inUART0_RXISR_function)())
+                                    840 ;	-----------------------------------------
+                                    841 ;	 function setUartRXFun
+                                    842 ;	-----------------------------------------
+      000225                        843 _setUartRXFun:
+      000225 85 82*06         [24]  844 	mov	_UART0_RXISR_function,dpl
+      000228 85 83*07         [24]  845 	mov	(_UART0_RXISR_function + 1),dph
+                                    846 ;	UART/UART.c:183: UART0_RXISR_function = inUART0_RXISR_function;
+      00022B 22               [24]  847 	ret
+                                    848 ;------------------------------------------------------------
+                                    849 ;Allocation info for local variables in function 'setUartTXFun'
+                                    850 ;------------------------------------------------------------
+                                    851 ;inUART0_TXISR_function    Allocated to registers 
+                                    852 ;------------------------------------------------------------
+                                    853 ;	UART/UART.c:193: void setUartTXFun( void (*inUART0_TXISR_function)())
+                                    854 ;	-----------------------------------------
+                                    855 ;	 function setUartTXFun
+                                    856 ;	-----------------------------------------
+      00022C                        857 _setUartTXFun:
+      00022C 85 82*08         [24]  858 	mov	_UART0_TXISR_function,dpl
+      00022F 85 83*09         [24]  859 	mov	(_UART0_TXISR_function + 1),dph
+                                    860 ;	UART/UART.c:195: UART0_TXISR_function = inUART0_TXISR_function;
+      000232 22               [24]  861 	ret
+                                    862 	.area CSEG    (CODE)
+                                    863 	.area CONST   (CODE)
+      000000                        864 ___str_0:
+      000000 0D                     865 	.db 0x0D
+      000001 0A                     866 	.db 0x0A
+      000002 00                     867 	.db 0x00
+                                    868 	.area XINIT   (CODE)
+                                    869 	.area CABS    (ABS,CODE)

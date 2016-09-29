@@ -11,20 +11,31 @@
 
 void main()
 {
-	unsigned char str[17];
-	unsigned len =  0;
+
+	__xdata unsigned int i = 0;
+	unsigned char nu = 0;
+	__xdata cmdLen = 10;
+	__xdata unsigned char cmdStr[] = "AT+ROLE?\r\n";
+	char retLen;
+	__xdata unsigned char retStr[16];
+
 	initUart(9600);
 	initLcd();
 	HC05Init();
+	
 	while(1)
 	{
-		len = readString(str,16);
-		if(len != 0)
+		i++;
+		if(i > 50000)
 		{
-			str[len] = '\0';
+			
+			retLen = HC05GetRole(cmdStr,cmdLen,retStr,15);
+			retStr[retLen-1] = '0'+nu;
+			retStr[retLen] = '\0';
+			
+			LcdShowString(0,1,retStr);
+			i = 0;
 		}
-		LcdAreaClear(0,1,16);
-		LcdShowString(0,1,str);
-		delay10usValue(50000);
+	
 	}
 }

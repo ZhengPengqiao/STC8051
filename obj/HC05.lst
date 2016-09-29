@@ -1,0 +1,490 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.5.0 #9253 (Mar 24 2016) (Linux)
+                                      4 ; This file was generated Thu Sep 29 13:34:06 2016
+                                      5 ;--------------------------------------------------------
+                                      6 	.module HC05
+                                      7 	.optsdcc -mmcs51 --model-small
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _LcdShowString
+                                     13 	.globl _LcdAreaClear
+                                     14 	.globl _initLcd
+                                     15 	.globl _delay10usValue
+                                     16 	.globl _readString
+                                     17 	.globl _sendString
+                                     18 	.globl _TF2
+                                     19 	.globl _EXF2
+                                     20 	.globl _RCLK
+                                     21 	.globl _TCLK
+                                     22 	.globl _EXEN2
+                                     23 	.globl _TR2
+                                     24 	.globl _C_T2
+                                     25 	.globl _CP_RL2
+                                     26 	.globl _T2CON_7
+                                     27 	.globl _T2CON_6
+                                     28 	.globl _T2CON_5
+                                     29 	.globl _T2CON_4
+                                     30 	.globl _T2CON_3
+                                     31 	.globl _T2CON_2
+                                     32 	.globl _T2CON_1
+                                     33 	.globl _T2CON_0
+                                     34 	.globl _PT2
+                                     35 	.globl _ET2
+                                     36 	.globl _CY
+                                     37 	.globl _AC
+                                     38 	.globl _F0
+                                     39 	.globl _RS1
+                                     40 	.globl _RS0
+                                     41 	.globl _OV
+                                     42 	.globl _F1
+                                     43 	.globl _P
+                                     44 	.globl _PS
+                                     45 	.globl _PT1
+                                     46 	.globl _PX1
+                                     47 	.globl _PT0
+                                     48 	.globl _PX0
+                                     49 	.globl _RD
+                                     50 	.globl _WR
+                                     51 	.globl _T1
+                                     52 	.globl _T0
+                                     53 	.globl _INT1
+                                     54 	.globl _INT0
+                                     55 	.globl _TXD
+                                     56 	.globl _RXD
+                                     57 	.globl _P3_7
+                                     58 	.globl _P3_6
+                                     59 	.globl _P3_5
+                                     60 	.globl _P3_4
+                                     61 	.globl _P3_3
+                                     62 	.globl _P3_2
+                                     63 	.globl _P3_1
+                                     64 	.globl _P3_0
+                                     65 	.globl _EA
+                                     66 	.globl _ES
+                                     67 	.globl _ET1
+                                     68 	.globl _EX1
+                                     69 	.globl _ET0
+                                     70 	.globl _EX0
+                                     71 	.globl _P2_7
+                                     72 	.globl _P2_6
+                                     73 	.globl _P2_5
+                                     74 	.globl _P2_4
+                                     75 	.globl _P2_3
+                                     76 	.globl _P2_2
+                                     77 	.globl _P2_1
+                                     78 	.globl _P2_0
+                                     79 	.globl _SM0
+                                     80 	.globl _SM1
+                                     81 	.globl _SM2
+                                     82 	.globl _REN
+                                     83 	.globl _TB8
+                                     84 	.globl _RB8
+                                     85 	.globl _TI
+                                     86 	.globl _RI
+                                     87 	.globl _P1_7
+                                     88 	.globl _P1_6
+                                     89 	.globl _P1_5
+                                     90 	.globl _P1_4
+                                     91 	.globl _P1_3
+                                     92 	.globl _P1_2
+                                     93 	.globl _P1_1
+                                     94 	.globl _P1_0
+                                     95 	.globl _TF1
+                                     96 	.globl _TR1
+                                     97 	.globl _TF0
+                                     98 	.globl _TR0
+                                     99 	.globl _IE1
+                                    100 	.globl _IT1
+                                    101 	.globl _IE0
+                                    102 	.globl _IT0
+                                    103 	.globl _P0_7
+                                    104 	.globl _P0_6
+                                    105 	.globl _P0_5
+                                    106 	.globl _P0_4
+                                    107 	.globl _P0_3
+                                    108 	.globl _P0_2
+                                    109 	.globl _P0_1
+                                    110 	.globl _P0_0
+                                    111 	.globl _TH2
+                                    112 	.globl _TL2
+                                    113 	.globl _RCAP2H
+                                    114 	.globl _RCAP2L
+                                    115 	.globl _T2CON
+                                    116 	.globl _B
+                                    117 	.globl _ACC
+                                    118 	.globl _PSW
+                                    119 	.globl _IP
+                                    120 	.globl _P3
+                                    121 	.globl _IE
+                                    122 	.globl _P2
+                                    123 	.globl _SBUF
+                                    124 	.globl _SCON
+                                    125 	.globl _P1
+                                    126 	.globl _TH1
+                                    127 	.globl _TH0
+                                    128 	.globl _TL1
+                                    129 	.globl _TL0
+                                    130 	.globl _TMOD
+                                    131 	.globl _TCON
+                                    132 	.globl _PCON
+                                    133 	.globl _DPH
+                                    134 	.globl _DPL
+                                    135 	.globl _SP
+                                    136 	.globl _P0
+                                    137 	.globl _HC05GetRole_PARM_4
+                                    138 	.globl _HC05GetRole_PARM_3
+                                    139 	.globl _HC05GetRole_PARM_2
+                                    140 	.globl _HC05Init
+                                    141 	.globl _HC05CfgCmd
+                                    142 	.globl _HC05GetRole
+                                    143 	.globl _HC05SetCmd
+                                    144 ;--------------------------------------------------------
+                                    145 ; special function registers
+                                    146 ;--------------------------------------------------------
+                                    147 	.area RSEG    (ABS,DATA)
+      000000                        148 	.org 0x0000
+                           000080   149 _P0	=	0x0080
+                           000081   150 _SP	=	0x0081
+                           000082   151 _DPL	=	0x0082
+                           000083   152 _DPH	=	0x0083
+                           000087   153 _PCON	=	0x0087
+                           000088   154 _TCON	=	0x0088
+                           000089   155 _TMOD	=	0x0089
+                           00008A   156 _TL0	=	0x008a
+                           00008B   157 _TL1	=	0x008b
+                           00008C   158 _TH0	=	0x008c
+                           00008D   159 _TH1	=	0x008d
+                           000090   160 _P1	=	0x0090
+                           000098   161 _SCON	=	0x0098
+                           000099   162 _SBUF	=	0x0099
+                           0000A0   163 _P2	=	0x00a0
+                           0000A8   164 _IE	=	0x00a8
+                           0000B0   165 _P3	=	0x00b0
+                           0000B8   166 _IP	=	0x00b8
+                           0000D0   167 _PSW	=	0x00d0
+                           0000E0   168 _ACC	=	0x00e0
+                           0000F0   169 _B	=	0x00f0
+                           0000C8   170 _T2CON	=	0x00c8
+                           0000CA   171 _RCAP2L	=	0x00ca
+                           0000CB   172 _RCAP2H	=	0x00cb
+                           0000CC   173 _TL2	=	0x00cc
+                           0000CD   174 _TH2	=	0x00cd
+                                    175 ;--------------------------------------------------------
+                                    176 ; special function bits
+                                    177 ;--------------------------------------------------------
+                                    178 	.area RSEG    (ABS,DATA)
+      000000                        179 	.org 0x0000
+                           000080   180 _P0_0	=	0x0080
+                           000081   181 _P0_1	=	0x0081
+                           000082   182 _P0_2	=	0x0082
+                           000083   183 _P0_3	=	0x0083
+                           000084   184 _P0_4	=	0x0084
+                           000085   185 _P0_5	=	0x0085
+                           000086   186 _P0_6	=	0x0086
+                           000087   187 _P0_7	=	0x0087
+                           000088   188 _IT0	=	0x0088
+                           000089   189 _IE0	=	0x0089
+                           00008A   190 _IT1	=	0x008a
+                           00008B   191 _IE1	=	0x008b
+                           00008C   192 _TR0	=	0x008c
+                           00008D   193 _TF0	=	0x008d
+                           00008E   194 _TR1	=	0x008e
+                           00008F   195 _TF1	=	0x008f
+                           000090   196 _P1_0	=	0x0090
+                           000091   197 _P1_1	=	0x0091
+                           000092   198 _P1_2	=	0x0092
+                           000093   199 _P1_3	=	0x0093
+                           000094   200 _P1_4	=	0x0094
+                           000095   201 _P1_5	=	0x0095
+                           000096   202 _P1_6	=	0x0096
+                           000097   203 _P1_7	=	0x0097
+                           000098   204 _RI	=	0x0098
+                           000099   205 _TI	=	0x0099
+                           00009A   206 _RB8	=	0x009a
+                           00009B   207 _TB8	=	0x009b
+                           00009C   208 _REN	=	0x009c
+                           00009D   209 _SM2	=	0x009d
+                           00009E   210 _SM1	=	0x009e
+                           00009F   211 _SM0	=	0x009f
+                           0000A0   212 _P2_0	=	0x00a0
+                           0000A1   213 _P2_1	=	0x00a1
+                           0000A2   214 _P2_2	=	0x00a2
+                           0000A3   215 _P2_3	=	0x00a3
+                           0000A4   216 _P2_4	=	0x00a4
+                           0000A5   217 _P2_5	=	0x00a5
+                           0000A6   218 _P2_6	=	0x00a6
+                           0000A7   219 _P2_7	=	0x00a7
+                           0000A8   220 _EX0	=	0x00a8
+                           0000A9   221 _ET0	=	0x00a9
+                           0000AA   222 _EX1	=	0x00aa
+                           0000AB   223 _ET1	=	0x00ab
+                           0000AC   224 _ES	=	0x00ac
+                           0000AF   225 _EA	=	0x00af
+                           0000B0   226 _P3_0	=	0x00b0
+                           0000B1   227 _P3_1	=	0x00b1
+                           0000B2   228 _P3_2	=	0x00b2
+                           0000B3   229 _P3_3	=	0x00b3
+                           0000B4   230 _P3_4	=	0x00b4
+                           0000B5   231 _P3_5	=	0x00b5
+                           0000B6   232 _P3_6	=	0x00b6
+                           0000B7   233 _P3_7	=	0x00b7
+                           0000B0   234 _RXD	=	0x00b0
+                           0000B1   235 _TXD	=	0x00b1
+                           0000B2   236 _INT0	=	0x00b2
+                           0000B3   237 _INT1	=	0x00b3
+                           0000B4   238 _T0	=	0x00b4
+                           0000B5   239 _T1	=	0x00b5
+                           0000B6   240 _WR	=	0x00b6
+                           0000B7   241 _RD	=	0x00b7
+                           0000B8   242 _PX0	=	0x00b8
+                           0000B9   243 _PT0	=	0x00b9
+                           0000BA   244 _PX1	=	0x00ba
+                           0000BB   245 _PT1	=	0x00bb
+                           0000BC   246 _PS	=	0x00bc
+                           0000D0   247 _P	=	0x00d0
+                           0000D1   248 _F1	=	0x00d1
+                           0000D2   249 _OV	=	0x00d2
+                           0000D3   250 _RS0	=	0x00d3
+                           0000D4   251 _RS1	=	0x00d4
+                           0000D5   252 _F0	=	0x00d5
+                           0000D6   253 _AC	=	0x00d6
+                           0000D7   254 _CY	=	0x00d7
+                           0000AD   255 _ET2	=	0x00ad
+                           0000BD   256 _PT2	=	0x00bd
+                           0000C8   257 _T2CON_0	=	0x00c8
+                           0000C9   258 _T2CON_1	=	0x00c9
+                           0000CA   259 _T2CON_2	=	0x00ca
+                           0000CB   260 _T2CON_3	=	0x00cb
+                           0000CC   261 _T2CON_4	=	0x00cc
+                           0000CD   262 _T2CON_5	=	0x00cd
+                           0000CE   263 _T2CON_6	=	0x00ce
+                           0000CF   264 _T2CON_7	=	0x00cf
+                           0000C8   265 _CP_RL2	=	0x00c8
+                           0000C9   266 _C_T2	=	0x00c9
+                           0000CA   267 _TR2	=	0x00ca
+                           0000CB   268 _EXEN2	=	0x00cb
+                           0000CC   269 _TCLK	=	0x00cc
+                           0000CD   270 _RCLK	=	0x00cd
+                           0000CE   271 _EXF2	=	0x00ce
+                           0000CF   272 _TF2	=	0x00cf
+                                    273 ;--------------------------------------------------------
+                                    274 ; overlayable register banks
+                                    275 ;--------------------------------------------------------
+                                    276 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        277 	.ds 8
+                                    278 ;--------------------------------------------------------
+                                    279 ; internal ram data
+                                    280 ;--------------------------------------------------------
+                                    281 	.area DSEG    (DATA)
+      000000                        282 _HC05Init_str_1_22:
+      000000                        283 	.ds 10
+      00000A                        284 _HC05GetRole_PARM_2:
+      00000A                        285 	.ds 2
+      00000C                        286 _HC05GetRole_PARM_3:
+      00000C                        287 	.ds 3
+      00000F                        288 _HC05GetRole_PARM_4:
+      00000F                        289 	.ds 2
+                                    290 ;--------------------------------------------------------
+                                    291 ; overlayable items in internal ram 
+                                    292 ;--------------------------------------------------------
+                                    293 	.area	OSEG    (OVR,DATA)
+                                    294 	.area	OSEG    (OVR,DATA)
+                                    295 ;--------------------------------------------------------
+                                    296 ; indirectly addressable internal ram data
+                                    297 ;--------------------------------------------------------
+                                    298 	.area ISEG    (DATA)
+                                    299 ;--------------------------------------------------------
+                                    300 ; absolute internal ram data
+                                    301 ;--------------------------------------------------------
+                                    302 	.area IABS    (ABS,DATA)
+                                    303 	.area IABS    (ABS,DATA)
+                                    304 ;--------------------------------------------------------
+                                    305 ; bit data
+                                    306 ;--------------------------------------------------------
+                                    307 	.area BSEG    (BIT)
+                                    308 ;--------------------------------------------------------
+                                    309 ; paged external ram data
+                                    310 ;--------------------------------------------------------
+                                    311 	.area PSEG    (PAG,XDATA)
+                                    312 ;--------------------------------------------------------
+                                    313 ; external ram data
+                                    314 ;--------------------------------------------------------
+                                    315 	.area XSEG    (XDATA)
+                                    316 ;--------------------------------------------------------
+                                    317 ; absolute external ram data
+                                    318 ;--------------------------------------------------------
+                                    319 	.area XABS    (ABS,XDATA)
+                                    320 ;--------------------------------------------------------
+                                    321 ; external initialized ram data
+                                    322 ;--------------------------------------------------------
+                                    323 	.area XISEG   (XDATA)
+                                    324 	.area HOME    (CODE)
+                                    325 	.area GSINIT0 (CODE)
+                                    326 	.area GSINIT1 (CODE)
+                                    327 	.area GSINIT2 (CODE)
+                                    328 	.area GSINIT3 (CODE)
+                                    329 	.area GSINIT4 (CODE)
+                                    330 	.area GSINIT5 (CODE)
+                                    331 	.area GSINIT  (CODE)
+                                    332 	.area GSFINAL (CODE)
+                                    333 	.area CSEG    (CODE)
+                                    334 ;--------------------------------------------------------
+                                    335 ; global & static initialisations
+                                    336 ;--------------------------------------------------------
+                                    337 	.area HOME    (CODE)
+                                    338 	.area GSINIT  (CODE)
+                                    339 	.area GSFINAL (CODE)
+                                    340 	.area GSINIT  (CODE)
+                                    341 ;--------------------------------------------------------
+                                    342 ; Home
+                                    343 ;--------------------------------------------------------
+                                    344 	.area HOME    (CODE)
+                                    345 	.area HOME    (CODE)
+                                    346 ;--------------------------------------------------------
+                                    347 ; code
+                                    348 ;--------------------------------------------------------
+                                    349 	.area CSEG    (CODE)
+                                    350 ;------------------------------------------------------------
+                                    351 ;Allocation info for local variables in function 'HC05Init'
+                                    352 ;------------------------------------------------------------
+                                    353 ;str                       Allocated with name '_HC05Init_str_1_22'
+                                    354 ;i                         Allocated to registers 
+                                    355 ;------------------------------------------------------------
+                                    356 ;	HC05/HC05.c:5: unsigned char HC05Init(void)
+                                    357 ;	-----------------------------------------
+                                    358 ;	 function HC05Init
+                                    359 ;	-----------------------------------------
+      000000                        360 _HC05Init:
+                           000007   361 	ar7 = 0x07
+                           000006   362 	ar6 = 0x06
+                           000005   363 	ar5 = 0x05
+                           000004   364 	ar4 = 0x04
+                           000003   365 	ar3 = 0x03
+                           000002   366 	ar2 = 0x02
+                           000001   367 	ar1 = 0x01
+                           000000   368 	ar0 = 0x00
+                                    369 ;	HC05/HC05.c:10: initLcd();
+      000000 12r00r00         [24]  370 	lcall	_initLcd
+                                    371 ;	HC05/HC05.c:12: while(1)
+      000003                        372 00105$:
+                                    373 ;	HC05/HC05.c:14: sendString("AT\r\n",4);
+      000003 75*00 04         [24]  374 	mov	_sendString_PARM_2,#0x04
+      000006 75*01 00         [24]  375 	mov	(_sendString_PARM_2 + 1),#0x00
+      000009 90r00r00         [24]  376 	mov	dptr,#___str_0
+      00000C 75 F0 80         [24]  377 	mov	b,#0x80
+      00000F 12r00r00         [24]  378 	lcall	_sendString
+                                    379 ;	HC05/HC05.c:15: delay10usValue(1000);
+      000012 90 03 E8         [24]  380 	mov	dptr,#0x03E8
+      000015 12r00r00         [24]  381 	lcall	_delay10usValue
+                                    382 ;	HC05/HC05.c:16: readString(str,3);
+      000018 75*00 03         [24]  383 	mov	_readString_PARM_2,#0x03
+      00001B 75*01 00         [24]  384 	mov	(_readString_PARM_2 + 1),#0x00
+      00001E 90r00r00         [24]  385 	mov	dptr,#_HC05Init_str_1_22
+      000021 75 F0 40         [24]  386 	mov	b,#0x40
+      000024 12r00r00         [24]  387 	lcall	_readString
+                                    388 ;	HC05/HC05.c:17: if( str[0] == 'O' && str[1] == 'K')
+      000027 74 4F            [12]  389 	mov	a,#0x4F
+      000029 B5*00 27         [24]  390 	cjne	a,_HC05Init_str_1_22,00102$
+      00002C 74 4B            [12]  391 	mov	a,#0x4B
+      00002E B5*01 22         [24]  392 	cjne	a,(_HC05Init_str_1_22 + 0x0001),00102$
+                                    393 ;	HC05/HC05.c:19: LcdAreaClear(0,0,16);
+      000031 75*00 00         [24]  394 	mov	_LcdAreaClear_PARM_2,#0x00
+      000034 75*00 10         [24]  395 	mov	_LcdAreaClear_PARM_3,#0x10
+      000037 75 82 00         [24]  396 	mov	dpl,#0x00
+      00003A 12r00r00         [24]  397 	lcall	_LcdAreaClear
+                                    398 ;	HC05/HC05.c:20: LcdShowString(0,0,"HC05-OK");
+      00003D 75*00r05         [24]  399 	mov	_LcdShowString_PARM_3,#___str_1
+      000040 75*01s00         [24]  400 	mov	(_LcdShowString_PARM_3 + 1),#(___str_1 >> 8)
+      000043 75*02 80         [24]  401 	mov	(_LcdShowString_PARM_3 + 2),#0x80
+      000046 75*00 00         [24]  402 	mov	_LcdShowString_PARM_2,#0x00
+      000049 75 82 00         [24]  403 	mov	dpl,#0x00
+      00004C 12r00r00         [24]  404 	lcall	_LcdShowString
+                                    405 ;	HC05/HC05.c:21: return 0;
+      00004F 75 82 00         [24]  406 	mov	dpl,#0x00
+      000052 22               [24]  407 	ret
+      000053                        408 00102$:
+                                    409 ;	HC05/HC05.c:23: LcdShowString(0,0,"HC05-Error");
+      000053 75*00r0D         [24]  410 	mov	_LcdShowString_PARM_3,#___str_2
+      000056 75*01s00         [24]  411 	mov	(_LcdShowString_PARM_3 + 1),#(___str_2 >> 8)
+      000059 75*02 80         [24]  412 	mov	(_LcdShowString_PARM_3 + 2),#0x80
+      00005C 75*00 00         [24]  413 	mov	_LcdShowString_PARM_2,#0x00
+      00005F 75 82 00         [24]  414 	mov	dpl,#0x00
+      000062 12r00r00         [24]  415 	lcall	_LcdShowString
+      000065 80 9C            [24]  416 	sjmp	00105$
+                                    417 ;------------------------------------------------------------
+                                    418 ;Allocation info for local variables in function 'HC05CfgCmd'
+                                    419 ;------------------------------------------------------------
+                                    420 ;str                       Allocated to registers 
+                                    421 ;------------------------------------------------------------
+                                    422 ;	HC05/HC05.c:27: void HC05CfgCmd(unsigned char *str)
+                                    423 ;	-----------------------------------------
+                                    424 ;	 function HC05CfgCmd
+                                    425 ;	-----------------------------------------
+      000067                        426 _HC05CfgCmd:
+                                    427 ;	HC05/HC05.c:29: str = str+1;
+      000067 22               [24]  428 	ret
+                                    429 ;------------------------------------------------------------
+                                    430 ;Allocation info for local variables in function 'HC05GetRole'
+                                    431 ;------------------------------------------------------------
+                                    432 ;cmdLen                    Allocated with name '_HC05GetRole_PARM_2'
+                                    433 ;retStr                    Allocated with name '_HC05GetRole_PARM_3'
+                                    434 ;retStrLen                 Allocated with name '_HC05GetRole_PARM_4'
+                                    435 ;cmdStr                    Allocated to registers r5 r6 r7 
+                                    436 ;------------------------------------------------------------
+                                    437 ;	HC05/HC05.c:32: unsigned char HC05GetRole(char cmdStr[],int cmdLen,char retStr [],int retStrLen)
+                                    438 ;	-----------------------------------------
+                                    439 ;	 function HC05GetRole
+                                    440 ;	-----------------------------------------
+      000068                        441 _HC05GetRole:
+      000068 AD 82            [24]  442 	mov	r5,dpl
+      00006A AE 83            [24]  443 	mov	r6,dph
+      00006C AF F0            [24]  444 	mov	r7,b
+                                    445 ;	HC05/HC05.c:34: sendString(cmdStr,cmdLen);
+      00006E 85*0A*00         [24]  446 	mov	_sendString_PARM_2,_HC05GetRole_PARM_2
+      000071 85*0B*01         [24]  447 	mov	(_sendString_PARM_2 + 1),(_HC05GetRole_PARM_2 + 1)
+      000074 8D 82            [24]  448 	mov	dpl,r5
+      000076 8E 83            [24]  449 	mov	dph,r6
+      000078 8F F0            [24]  450 	mov	b,r7
+      00007A 12r00r00         [24]  451 	lcall	_sendString
+                                    452 ;	HC05/HC05.c:35: delay10usValue(1000);
+      00007D 90 03 E8         [24]  453 	mov	dptr,#0x03E8
+      000080 12r00r00         [24]  454 	lcall	_delay10usValue
+                                    455 ;	HC05/HC05.c:36: return readString(retStr,retStrLen);
+      000083 85*0F*00         [24]  456 	mov	_readString_PARM_2,_HC05GetRole_PARM_4
+      000086 85*10*01         [24]  457 	mov	(_readString_PARM_2 + 1),(_HC05GetRole_PARM_4 + 1)
+      000089 85*0C 82         [24]  458 	mov	dpl,_HC05GetRole_PARM_3
+      00008C 85*0D 83         [24]  459 	mov	dph,(_HC05GetRole_PARM_3 + 1)
+      00008F 85*0E F0         [24]  460 	mov	b,(_HC05GetRole_PARM_3 + 2)
+      000092 02r00r00         [24]  461 	ljmp	_readString
+                                    462 ;------------------------------------------------------------
+                                    463 ;Allocation info for local variables in function 'HC05SetCmd'
+                                    464 ;------------------------------------------------------------
+                                    465 ;atstr                     Allocated to registers 
+                                    466 ;------------------------------------------------------------
+                                    467 ;	HC05/HC05.c:39: unsigned char HC05SetCmd(unsigned char * atstr)
+                                    468 ;	-----------------------------------------
+                                    469 ;	 function HC05SetCmd
+                                    470 ;	-----------------------------------------
+      000095                        471 _HC05SetCmd:
+                                    472 ;	HC05/HC05.c:42: return 0;
+      000095 75 82 00         [24]  473 	mov	dpl,#0x00
+      000098 22               [24]  474 	ret
+                                    475 	.area CSEG    (CODE)
+                                    476 	.area CONST   (CODE)
+      000000                        477 ___str_0:
+      000000 41 54                  478 	.ascii "AT"
+      000002 0D                     479 	.db 0x0D
+      000003 0A                     480 	.db 0x0A
+      000004 00                     481 	.db 0x00
+      000005                        482 ___str_1:
+      000005 48 43 30 35 2D 4F 4B   483 	.ascii "HC05-OK"
+      00000C 00                     484 	.db 0x00
+      00000D                        485 ___str_2:
+      00000D 48 43 30 35 2D 45 72   486 	.ascii "HC05-Error"
+             72 6F 72
+      000017 00                     487 	.db 0x00
+                                    488 	.area XINIT   (CODE)
+                                    489 	.area CABS    (ABS,CODE)

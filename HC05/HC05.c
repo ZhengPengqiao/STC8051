@@ -12,6 +12,7 @@ unsigned char HC05Init(void)
 	while(1)
 	{
 		sendString("AT\r\n",4);
+		delay10usValue(1000);
 		readString(str,3);
 		if( str[0] == 'O' && str[1] == 'K')
 		{
@@ -28,9 +29,11 @@ void HC05CfgCmd(unsigned char *str)
 	str = str+1;
 }
 
-unsigned char HC05GetRole(void)
+unsigned char HC05GetRole(char cmdStr[],int cmdLen,char retStr [],int retStrLen)
 {
-	return 0;
+	sendString(cmdStr,cmdLen);
+	delay10usValue(1000);
+	return readString(retStr,retStrLen);
 }
 
 unsigned char HC05SetCmd(unsigned char * atstr)
