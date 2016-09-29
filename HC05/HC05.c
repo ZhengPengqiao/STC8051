@@ -1,7 +1,6 @@
 #include "HC05.h"
 #include "UART.h"
 #include "TIMER.h"
-#include "LCD1602.h"
 
 void replaceEnter(char str[], int len)
 {
@@ -20,21 +19,14 @@ unsigned char HC05Init(void)
 	unsigned char str[10];
 	unsigned int i = 0;
 
-	initLcd();
-	
-	while(1)
+	sendString("AT\r\n",4);
+	delay10usValue(1000);
+	readString(str,10);
+	if( str[0] == 'O' && str[1] == 'K')
 	{
-		sendString("AT\r\n",4);
-		delay10usValue(1000);
-		readString(str,3);
-		if( str[0] == 'O' && str[1] == 'K')
-		{
-			LcdAreaClear(0,0,16);
-			LcdShowString(0,0,"HC05-OK");
-			return 0;
-		}
-		LcdShowString(0,0,"HC05-Error");
+		return 1;
 	}
+	return 0;
 }
 
 
