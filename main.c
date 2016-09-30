@@ -40,7 +40,7 @@ void main()
 		LcdShowString(0,1,data);
 		
 		
-		value = (TH1 << 8) + TL1;  //+的优先级比<<大.所以应将(TH1 << 8)括起来,
+		value = (TH1 << 8) + TL1;  //+的优先级比<<大.所以应将(TH1 << 8)括起来, 
 									//不然会先＋然后在移位,这样就会出错
 		
 		data[5] = value % 10 + '0';
