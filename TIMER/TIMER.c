@@ -193,7 +193,14 @@ void delay10us()
  ******************************************************************************/
 void delay10usValue(unsigned int value)
 {
-	while(value--);
+	while(value--)
+	{
+		__asm 
+		NOP
+		NOP
+		NOP
+		__endasm;
+	}
 }
 
 
