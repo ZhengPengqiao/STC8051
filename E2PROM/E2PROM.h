@@ -40,4 +40,13 @@ extern void e2promRead(unsigned char addr,unsigned char *buff, \
  ******************************************************************************/
 extern void e2promWrite(unsigned char addr,unsigned char *buff, \
 								unsigned char len);
+								
+/*******************************************************************************
+ * 函数名称 : e2promWriteByPage
+ * 函数介绍 :	通过页方式向e2prom写入多个字节
+ * 参数介绍 : addr : 写入字节的首地址.buff:写入内容的缓冲区,len:写入的长度
+ * 返回值   : 无
+ ******************************************************************************/
+extern void e2promWriteByPage(unsigned char addr,unsigned char *buff, \
+								unsigned char len);
 #endif //__E2PROM_H_

@@ -1,5 +1,5 @@
 #include "E2PROM.h"
-
+#include "TIMER.h"
 /*******************************************************************************
  * 函数名称 : e2promReadByte
  * 函数介绍 :	读取e2prom的一个字节
@@ -94,6 +94,43 @@ void e2promWrite(unsigned char addr,unsigned char *buff, \
 {
 	while(len--)
 	{
-		e2promWriteByte(addr++,*buff++);
+		e2promWriteByte(addr++,(*buff)++);
+	}
+}
+
+
+/*******************************************************************************
+ * 函数名称 : e2promWriteByPage
+ * 函数介绍 :	通过页方式向e2prom写入多个字节
+ * 参数介绍 : addr : 写入字节的首地址.buff:写入内容的缓冲区,len:写入的长度
+ * 返回值   : 无
+ ******************************************************************************/
+void e2promWriteByPage(unsigned char addr,unsigned char *buff, \
+								unsigned char len)
+{
+	while(len > 0)
+	{
+		do
+		{
+			i2cStart();
+			if( i2cWrite(0x50<<1) )  //寻址器件,后续为写操作
+			{
+				break;
+			}
+			i2cStop();
+		}while(1);
+		i2cWrite(addr);
+		while(len > 0)
+		{
+			i2cWrite(*buff++);     //写入内容
+			len--;
+			addr++;
+			if( (addr & 0x07) == 0)
+			{
+				break;
+			}
+		}
+		i2cStop();
+			
 	}
 }
