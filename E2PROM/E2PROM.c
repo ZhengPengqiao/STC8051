@@ -73,8 +73,9 @@ void e2promRead(unsigned char addr,unsigned char *buff, \
 	i2cWrite( (0x50<<1) | 0x01);  //寻址器件,后续为读操作
 	while( len > 1 )
 	{
-		*buff++ = i2cReadACK();
+		*buff = i2cReadACK();
 		len--;
+		buff++;
 	}
 	
 	*buff++ = i2cReadNAK();
@@ -93,7 +94,9 @@ void e2promWrite(unsigned char addr,unsigned char *buff, \
 {
 	while(len--)
 	{
-		e2promWriteByte(addr++,(*buff)++);
+		e2promWriteByte(addr,*buff);
+		buff++;
+		addr++;
 	}
 }
 
