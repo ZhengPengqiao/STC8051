@@ -23,8 +23,11 @@ void main()
 		buff[i] = i;
 	}
 	
+	for(i = 0; i < 20; i++)
+	{
+		e2promWriteByte(i,buff[i]);
+	}
 
-	e2promWriteByPage(0,buff,20);
 
 	e2promRead(0,ret,20);
 
