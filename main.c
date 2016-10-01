@@ -23,18 +23,16 @@ void main()
 		buff[i] = i;
 	}
 	
-	for(i = 0; i < 20; i++)
-	{
-		e2promWriteByte(i,i);
-	}
-	
+
+	e2promWriteByPage(0,buff,20);
+
 	e2promRead(0,ret,20);
 
     while(1)
     {   
 
 		
-		if(ret[addr] != addr)
+		if(ret[addr] != buff[addr])
 		{
 			err++;
 		}
