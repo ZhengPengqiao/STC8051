@@ -21,7 +21,8 @@ unsigned char e2promReadByte(unsigned char addr)
 	i2cWrite(addr);     //写入地址
 	i2cStart();
 	i2cWrite( (0x50<<1) | 0x01);  //寻址器件,后续为读操作
-	da = i2cReadACK();            //读取一个字节
+	da = i2cReadNAK();            //读取一个字节,发送非响应位,否则将会认为还要读下一位
+									//
 	i2cStop();
 	
 	return da;

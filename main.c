@@ -27,7 +27,11 @@ void main()
 	e2promWrite(0,buff,20);
 
 
-	e2promRead(0,ret,20);
+	for(i = 0; i < 20; i++)
+	{
+		ret[i] = e2promReadByte(i);
+	}
+
 
     while(1)
     {   
