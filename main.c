@@ -1,71 +1,29 @@
 #include "TIMER.h"
 #include "LEDSHU.h"
 #include "LCD1602.h"
-#include "I2C.h"
-#include "E2PROM.h"
-__xdata unsigned char data[6] = {0,0,0,0,0,0};
-
+#include "MOTOR.h"
 
 void main()
 {
+	int i;
+	unsigned int ch = 0;
+	unsigned int times = 0;
 
-	unsigned char da = 0;
-	unsigned char addr = 0;
-	unsigned char i;
-	char str[13];
-	unsigned char err = 0;  //记录错误的个数
-	unsigned char buff[20];
-	unsigned char ret[20];
-	initLcd();
-
-
-	for(i = 0; i < 20; i++)
-	{
-		buff[i] = i;
-	}
-
-	e2promWrite(0,buff,20);
-
-
-	for(i = 0; i < 20; i++)
-	{
-		ret[i] = e2promReadByte(i);
-	}
-
-
+	times = motorRunAngle(180);  //得到180度对应的转动次数
     while(1)
-    {   
+    {
 
-		
-		if(ret[addr] != buff[addr])
+		if(ch <= times)
 		{
-			err++;
+			motorStep();
 		}
 		
-		str[0] = ret[addr] / 100 + '0';          //显示读取到的数据
-		str[1] = ret[addr] / 10 % 10 + '0';
-		str[2] = ret[addr] % 10 + '0';
-		str[3] = ' ';
-		str[4] = ' ';
-		str[5] = err / 100 + '0';         //显示错误个数
-		str[6] = err / 10 % 10 + '0';
-		str[7] = err % 10 + '0';
-		str[8] = '/';
-		str[9] = buff[addr] / 100 + '0';         //显示当前位置
-		str[10] = buff[addr] / 10 % 10 + '0';
-		str[11] = buff[addr] % 10 + '0';
-		str[12] = '\0';
-
-		
-		LcdShowString(0,0,str);
-		addr++;
-
-		if(addr >= 20)
+		for(i = 0; i < 200; i++)
 		{
-			addr = 0;
-			err = 0;
+			
 		}
-		delay10usValue(50000);
-		delay10usValue(50000);
+		
+		ch++;
+
     }
 }
