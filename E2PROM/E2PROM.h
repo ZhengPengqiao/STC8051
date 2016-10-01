@@ -49,4 +49,9 @@ extern void e2promWrite(unsigned char addr,unsigned char *buff, \
  ******************************************************************************/
 extern void e2promWriteByPage(unsigned char addr,unsigned char *buff, \
 								unsigned char len);
+								
+								
+								
+extern void E2Read(unsigned char addr, unsigned char *buf,unsigned char len);
+extern void E2Write(unsigned char addr, unsigned char *buf,unsigned char len);
 #endif //__E2PROM_H_
