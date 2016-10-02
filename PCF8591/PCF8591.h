@@ -1,8 +1,18 @@
-#ifndef __ADDA_H_
-#define __ADDA_H_
+#ifndef __PCF8591_H_
+#define __PCF8591_H_
 
 #include "kingst.h"
 #include "config.h"
+#include "I2C.h"
+
+
+/*******************************************************************************
+ *  函数名字 ：  initPCF8591
+ *  函数介绍 ：  初始化PCF8591芯片
+ *  参数介绍 ：  无
+ *  返回    ：  无
+ ******************************************************************************/
+extern void initPCF8591();
 
 /*******************************************************************************
  *  函数名字 ：  getADCValue
@@ -19,4 +29,4 @@ extern unsigned char getADCValue(unsigned char chan);
  *  返回    ：  无   
  ******************************************************************************/
 extern void setDACValue(unsigned char value);
-#endif //__ADDA_H_
+#endif //__PCF8591_H_
