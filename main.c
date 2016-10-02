@@ -21,7 +21,8 @@ void main()
 		LcdShowString(10,0,"VO:");
 		LcdShowString(13,0,str);
 		
-		retval = getADCValue(DIFF3,0);    //差分输入模式3,0通道数据
+		//差分输入模式3,自动转换,因为是读取的上次转换的结果,所以读取的是1通道
+		retval = getADCAutoValue(DIFF3,1); 
 		str[0] = retval / 100 % 10 + '0';
 		str[1] = retval / 10 % 10 + '0';
 		str[2] = retval     % 10 + '0';
@@ -29,7 +30,8 @@ void main()
 		LcdShowString(0,0,"CHA0:");
 		LcdShowString(6,0,str);
 		
-		retval = getADCValue(DIFF3,1);  //差分输入模式3,1通道数据
+		//差分输入模式3,自动转换,因为是读取的上次转换的结果,所以读取的是0通道
+		retval = getADCAutoValue(DIFF3,0);  
 		str[0] = retval / 100 % 10 + '0';
 		str[1] = retval / 10 % 10 + '0';
 		str[2] = retval     % 10 + '0';

@@ -30,7 +30,7 @@ extern unsigned char getADCValue(ADMODE mode, unsigned char chan);
  *  参数介绍 ：  mode : 选择模式,是单端,还是差分
  *  返回    ：  得到ADC的值
  ******************************************************************************/
-extern unsigned char getADCAutoValue(ADMODE mode);
+extern unsigned char getADCAutoValue(ADMODE mode, unsigned char chan);
 
 /*******************************************************************************
  *  函数名字 ：  setDACValue
