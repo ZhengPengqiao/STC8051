@@ -9,8 +9,7 @@
 void initDS1302()
 {
 	unsigned char dat;
-	//2013 年 10 月 8 日 星期二 12:30:00
-	unsigned char InitTime[] = { 
+	unsigned char  InitTime[] = { //2013 年 10 月 8 日 星期二 12:30:00
 		0x00,0x30,0x12, 0x08, 0x10, 0x02, 0x13
 	};
 	DS1302_CE = 0; //初始化 DS1302 通信引脚
@@ -23,7 +22,6 @@ void initDS1302()
 		ds1302BurstWrite(InitTime); //设置 DS1302 为默认的初始时间
 	}
 }
-
 /*******************************************************************************
  * 函数名称 : ds1302ByteWrite
  * 函数介绍 : 向1302中写一个字节
@@ -149,9 +147,18 @@ void ds1302BurstWrite(unsigned char *data)
  * 参数介绍 : data : 包含要设置时间的结构体指针
  * 返回值   : 无
  ******************************************************************************/
-void setDs1302Time(DataStruct *date)
+void setDs1302Time(DataStruct *time)
 {
-	
+	unsigned char buf[8];
+	buf[7] = 0;
+	buf[6] = time->year;
+	buf[5] = time->week;
+	buf[4] = time->month;
+	buf[3] = time->day;
+	buf[2] = time->hour;
+	buf[1] = time->minutes;
+	buf[0] = time->seconds;
+	ds1302BurstWrite(buf);
 }
 
 /*******************************************************************************
@@ -160,7 +167,15 @@ void setDs1302Time(DataStruct *date)
  * 参数介绍 : data : 用来保存时间的结构体指针
  * 返回值   : 无
  ******************************************************************************/
-void getDs1302Time(DataStruct *date)
+void getDs1302Time(DataStruct *time)
 {
-	
+	unsigned char buf[8];
+	ds1302BurstRead(buf);
+	time->year = buf[6] + 0x2000;
+	time->month = buf[4];
+	time->day = buf[3];
+	time->hour = buf[2];
+	time->minutes = buf[1];
+	time->seconds = buf[0];
+	time->week = buf[5];
 }

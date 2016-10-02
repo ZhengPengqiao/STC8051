@@ -10,13 +10,13 @@
 
 typedef struct 
 {
-	unsigned int year;
-	unsigned char month;
-	unsigned char date;
-	unsigned char hour;
-	unsigned char minutes;
-	unsigned char seconds;
-	unsigned char week;
+	unsigned int year;        //年
+	unsigned char month;      //月
+	unsigned char day;       //日
+	unsigned char hour;       //时
+	unsigned char minutes;    //分
+	unsigned char seconds;    //秒
+	unsigned char week;       //星期
 }DataStruct;
 
 /*******************************************************************************
@@ -26,6 +26,7 @@ typedef struct
  * 返回值   : 无
  ******************************************************************************/
 extern void initDS1302();
+
 
 /*******************************************************************************
  * 函数名称 : ds1302ByteWrite
@@ -84,7 +85,7 @@ extern void ds1302BurstWrite(unsigned char *data);
  * 参数介绍 : data : 包含要设置时间的结构体指针
  * 返回值   : 无
  ******************************************************************************/
-extern void setDs1302Time(DataStruct *date);
+extern void setDs1302Time(DataStruct *time);
 
 /*******************************************************************************
  * 函数名称 : getDs1302Time
@@ -92,6 +93,6 @@ extern void setDs1302Time(DataStruct *date);
  * 参数介绍 : data : 用来保存时间的结构体指针
  * 返回值   : 无
  ******************************************************************************/
-extern void getDs1302Time(DataStruct *date);
+extern void getDs1302Time(DataStruct *time);
 
 #endif //__DS1302_H_
