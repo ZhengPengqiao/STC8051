@@ -1,0 +1,1195 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.5.0 #9253 (Mar 24 2016) (Linux)
+                                      4 ; This file was generated Sun Oct  2 10:13:52 2016
+                                      5 ;--------------------------------------------------------
+                                      6 	.module TIMER
+                                      7 	.optsdcc -mmcs51 --model-small
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _time0Init
+                                     13 	.globl _timer0SetValue
+                                     14 	.globl _Timer0Stop
+                                     15 	.globl _Timer0Start
+                                     16 	.globl _TF2
+                                     17 	.globl _EXF2
+                                     18 	.globl _RCLK
+                                     19 	.globl _TCLK
+                                     20 	.globl _EXEN2
+                                     21 	.globl _TR2
+                                     22 	.globl _C_T2
+                                     23 	.globl _CP_RL2
+                                     24 	.globl _T2CON_7
+                                     25 	.globl _T2CON_6
+                                     26 	.globl _T2CON_5
+                                     27 	.globl _T2CON_4
+                                     28 	.globl _T2CON_3
+                                     29 	.globl _T2CON_2
+                                     30 	.globl _T2CON_1
+                                     31 	.globl _T2CON_0
+                                     32 	.globl _PT2
+                                     33 	.globl _ET2
+                                     34 	.globl _CY
+                                     35 	.globl _AC
+                                     36 	.globl _F0
+                                     37 	.globl _RS1
+                                     38 	.globl _RS0
+                                     39 	.globl _OV
+                                     40 	.globl _F1
+                                     41 	.globl _P
+                                     42 	.globl _PS
+                                     43 	.globl _PT1
+                                     44 	.globl _PX1
+                                     45 	.globl _PT0
+                                     46 	.globl _PX0
+                                     47 	.globl _RD
+                                     48 	.globl _WR
+                                     49 	.globl _T1
+                                     50 	.globl _T0
+                                     51 	.globl _INT1
+                                     52 	.globl _INT0
+                                     53 	.globl _TXD
+                                     54 	.globl _RXD
+                                     55 	.globl _P3_7
+                                     56 	.globl _P3_6
+                                     57 	.globl _P3_5
+                                     58 	.globl _P3_4
+                                     59 	.globl _P3_3
+                                     60 	.globl _P3_2
+                                     61 	.globl _P3_1
+                                     62 	.globl _P3_0
+                                     63 	.globl _EA
+                                     64 	.globl _ES
+                                     65 	.globl _ET1
+                                     66 	.globl _EX1
+                                     67 	.globl _ET0
+                                     68 	.globl _EX0
+                                     69 	.globl _P2_7
+                                     70 	.globl _P2_6
+                                     71 	.globl _P2_5
+                                     72 	.globl _P2_4
+                                     73 	.globl _P2_3
+                                     74 	.globl _P2_2
+                                     75 	.globl _P2_1
+                                     76 	.globl _P2_0
+                                     77 	.globl _SM0
+                                     78 	.globl _SM1
+                                     79 	.globl _SM2
+                                     80 	.globl _REN
+                                     81 	.globl _TB8
+                                     82 	.globl _RB8
+                                     83 	.globl _TI
+                                     84 	.globl _RI
+                                     85 	.globl _P1_7
+                                     86 	.globl _P1_6
+                                     87 	.globl _P1_5
+                                     88 	.globl _P1_4
+                                     89 	.globl _P1_3
+                                     90 	.globl _P1_2
+                                     91 	.globl _P1_1
+                                     92 	.globl _P1_0
+                                     93 	.globl _TF1
+                                     94 	.globl _TR1
+                                     95 	.globl _TF0
+                                     96 	.globl _TR0
+                                     97 	.globl _IE1
+                                     98 	.globl _IT1
+                                     99 	.globl _IE0
+                                    100 	.globl _IT0
+                                    101 	.globl _P0_7
+                                    102 	.globl _P0_6
+                                    103 	.globl _P0_5
+                                    104 	.globl _P0_4
+                                    105 	.globl _P0_3
+                                    106 	.globl _P0_2
+                                    107 	.globl _P0_1
+                                    108 	.globl _P0_0
+                                    109 	.globl _TH2
+                                    110 	.globl _TL2
+                                    111 	.globl _RCAP2H
+                                    112 	.globl _RCAP2L
+                                    113 	.globl _T2CON
+                                    114 	.globl _B
+                                    115 	.globl _ACC
+                                    116 	.globl _PSW
+                                    117 	.globl _IP
+                                    118 	.globl _P3
+                                    119 	.globl _IE
+                                    120 	.globl _P2
+                                    121 	.globl _SBUF
+                                    122 	.globl _SCON
+                                    123 	.globl _P1
+                                    124 	.globl _TH1
+                                    125 	.globl _TH0
+                                    126 	.globl _TL1
+                                    127 	.globl _TL0
+                                    128 	.globl _TMOD
+                                    129 	.globl _TCON
+                                    130 	.globl _PCON
+                                    131 	.globl _DPH
+                                    132 	.globl _DPL
+                                    133 	.globl _SP
+                                    134 	.globl _P0
+                                    135 	.globl _timer0TaskStruct
+                                    136 	.globl _addTIMER0Task_PARM_3
+                                    137 	.globl _addTIMER0Task_PARM_2
+                                    138 	.globl _TIMER2FUN
+                                    139 	.globl _taskCount
+                                    140 	.globl _timerCount
+                                    141 	.globl _timerClock
+                                    142 	.globl _getTaskCount
+                                    143 	.globl _addTIMER0Task
+                                    144 	.globl _delTIMER0Task
+                                    145 	.globl _InterruptTimer0
+                                    146 	.globl _updateTIMER0
+                                    147 	.globl _delay10us
+                                    148 	.globl _delay10usValue
+                                    149 	.globl _initTimer2
+                                    150 	.globl _startTimer2
+                                    151 	.globl _stopTimer2
+                                    152 	.globl _InterruptTimer2
+                                    153 	.globl _setTimer2Fun
+                                    154 ;--------------------------------------------------------
+                                    155 ; special function registers
+                                    156 ;--------------------------------------------------------
+                                    157 	.area RSEG    (ABS,DATA)
+      000000                        158 	.org 0x0000
+                           000080   159 _P0	=	0x0080
+                           000081   160 _SP	=	0x0081
+                           000082   161 _DPL	=	0x0082
+                           000083   162 _DPH	=	0x0083
+                           000087   163 _PCON	=	0x0087
+                           000088   164 _TCON	=	0x0088
+                           000089   165 _TMOD	=	0x0089
+                           00008A   166 _TL0	=	0x008a
+                           00008B   167 _TL1	=	0x008b
+                           00008C   168 _TH0	=	0x008c
+                           00008D   169 _TH1	=	0x008d
+                           000090   170 _P1	=	0x0090
+                           000098   171 _SCON	=	0x0098
+                           000099   172 _SBUF	=	0x0099
+                           0000A0   173 _P2	=	0x00a0
+                           0000A8   174 _IE	=	0x00a8
+                           0000B0   175 _P3	=	0x00b0
+                           0000B8   176 _IP	=	0x00b8
+                           0000D0   177 _PSW	=	0x00d0
+                           0000E0   178 _ACC	=	0x00e0
+                           0000F0   179 _B	=	0x00f0
+                           0000C8   180 _T2CON	=	0x00c8
+                           0000CA   181 _RCAP2L	=	0x00ca
+                           0000CB   182 _RCAP2H	=	0x00cb
+                           0000CC   183 _TL2	=	0x00cc
+                           0000CD   184 _TH2	=	0x00cd
+                                    185 ;--------------------------------------------------------
+                                    186 ; special function bits
+                                    187 ;--------------------------------------------------------
+                                    188 	.area RSEG    (ABS,DATA)
+      000000                        189 	.org 0x0000
+                           000080   190 _P0_0	=	0x0080
+                           000081   191 _P0_1	=	0x0081
+                           000082   192 _P0_2	=	0x0082
+                           000083   193 _P0_3	=	0x0083
+                           000084   194 _P0_4	=	0x0084
+                           000085   195 _P0_5	=	0x0085
+                           000086   196 _P0_6	=	0x0086
+                           000087   197 _P0_7	=	0x0087
+                           000088   198 _IT0	=	0x0088
+                           000089   199 _IE0	=	0x0089
+                           00008A   200 _IT1	=	0x008a
+                           00008B   201 _IE1	=	0x008b
+                           00008C   202 _TR0	=	0x008c
+                           00008D   203 _TF0	=	0x008d
+                           00008E   204 _TR1	=	0x008e
+                           00008F   205 _TF1	=	0x008f
+                           000090   206 _P1_0	=	0x0090
+                           000091   207 _P1_1	=	0x0091
+                           000092   208 _P1_2	=	0x0092
+                           000093   209 _P1_3	=	0x0093
+                           000094   210 _P1_4	=	0x0094
+                           000095   211 _P1_5	=	0x0095
+                           000096   212 _P1_6	=	0x0096
+                           000097   213 _P1_7	=	0x0097
+                           000098   214 _RI	=	0x0098
+                           000099   215 _TI	=	0x0099
+                           00009A   216 _RB8	=	0x009a
+                           00009B   217 _TB8	=	0x009b
+                           00009C   218 _REN	=	0x009c
+                           00009D   219 _SM2	=	0x009d
+                           00009E   220 _SM1	=	0x009e
+                           00009F   221 _SM0	=	0x009f
+                           0000A0   222 _P2_0	=	0x00a0
+                           0000A1   223 _P2_1	=	0x00a1
+                           0000A2   224 _P2_2	=	0x00a2
+                           0000A3   225 _P2_3	=	0x00a3
+                           0000A4   226 _P2_4	=	0x00a4
+                           0000A5   227 _P2_5	=	0x00a5
+                           0000A6   228 _P2_6	=	0x00a6
+                           0000A7   229 _P2_7	=	0x00a7
+                           0000A8   230 _EX0	=	0x00a8
+                           0000A9   231 _ET0	=	0x00a9
+                           0000AA   232 _EX1	=	0x00aa
+                           0000AB   233 _ET1	=	0x00ab
+                           0000AC   234 _ES	=	0x00ac
+                           0000AF   235 _EA	=	0x00af
+                           0000B0   236 _P3_0	=	0x00b0
+                           0000B1   237 _P3_1	=	0x00b1
+                           0000B2   238 _P3_2	=	0x00b2
+                           0000B3   239 _P3_3	=	0x00b3
+                           0000B4   240 _P3_4	=	0x00b4
+                           0000B5   241 _P3_5	=	0x00b5
+                           0000B6   242 _P3_6	=	0x00b6
+                           0000B7   243 _P3_7	=	0x00b7
+                           0000B0   244 _RXD	=	0x00b0
+                           0000B1   245 _TXD	=	0x00b1
+                           0000B2   246 _INT0	=	0x00b2
+                           0000B3   247 _INT1	=	0x00b3
+                           0000B4   248 _T0	=	0x00b4
+                           0000B5   249 _T1	=	0x00b5
+                           0000B6   250 _WR	=	0x00b6
+                           0000B7   251 _RD	=	0x00b7
+                           0000B8   252 _PX0	=	0x00b8
+                           0000B9   253 _PT0	=	0x00b9
+                           0000BA   254 _PX1	=	0x00ba
+                           0000BB   255 _PT1	=	0x00bb
+                           0000BC   256 _PS	=	0x00bc
+                           0000D0   257 _P	=	0x00d0
+                           0000D1   258 _F1	=	0x00d1
+                           0000D2   259 _OV	=	0x00d2
+                           0000D3   260 _RS0	=	0x00d3
+                           0000D4   261 _RS1	=	0x00d4
+                           0000D5   262 _F0	=	0x00d5
+                           0000D6   263 _AC	=	0x00d6
+                           0000D7   264 _CY	=	0x00d7
+                           0000AD   265 _ET2	=	0x00ad
+                           0000BD   266 _PT2	=	0x00bd
+                           0000C8   267 _T2CON_0	=	0x00c8
+                           0000C9   268 _T2CON_1	=	0x00c9
+                           0000CA   269 _T2CON_2	=	0x00ca
+                           0000CB   270 _T2CON_3	=	0x00cb
+                           0000CC   271 _T2CON_4	=	0x00cc
+                           0000CD   272 _T2CON_5	=	0x00cd
+                           0000CE   273 _T2CON_6	=	0x00ce
+                           0000CF   274 _T2CON_7	=	0x00cf
+                           0000C8   275 _CP_RL2	=	0x00c8
+                           0000C9   276 _C_T2	=	0x00c9
+                           0000CA   277 _TR2	=	0x00ca
+                           0000CB   278 _EXEN2	=	0x00cb
+                           0000CC   279 _TCLK	=	0x00cc
+                           0000CD   280 _RCLK	=	0x00cd
+                           0000CE   281 _EXF2	=	0x00ce
+                           0000CF   282 _TF2	=	0x00cf
+                                    283 ;--------------------------------------------------------
+                                    284 ; overlayable register banks
+                                    285 ;--------------------------------------------------------
+                                    286 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        287 	.ds 8
+                                    288 ;--------------------------------------------------------
+                                    289 ; overlayable bit register bank
+                                    290 ;--------------------------------------------------------
+                                    291 	.area BIT_BANK	(REL,OVR,DATA)
+      000000                        292 bits:
+      000000                        293 	.ds 1
+                           008000   294 	b0 = bits[0]
+                           008100   295 	b1 = bits[1]
+                           008200   296 	b2 = bits[2]
+                           008300   297 	b3 = bits[3]
+                           008400   298 	b4 = bits[4]
+                           008500   299 	b5 = bits[5]
+                           008600   300 	b6 = bits[6]
+                           008700   301 	b7 = bits[7]
+                                    302 ;--------------------------------------------------------
+                                    303 ; internal ram data
+                                    304 ;--------------------------------------------------------
+                                    305 	.area DSEG    (DATA)
+      000000                        306 _timerClock::
+      000000                        307 	.ds 4
+      000004                        308 _timerCount::
+      000004                        309 	.ds 2
+      000006                        310 _taskCount::
+      000006                        311 	.ds 2
+      000008                        312 _TIMER2FUN::
+      000008                        313 	.ds 2
+      00000A                        314 _addTIMER0Task_PARM_2:
+      00000A                        315 	.ds 2
+      00000C                        316 _addTIMER0Task_PARM_3:
+      00000C                        317 	.ds 2
+      00000E                        318 _addTIMER0Task_inTimerMs_1_13:
+      00000E                        319 	.ds 2
+      000010                        320 _addTIMER0Task_sloc0_1_0:
+      000010                        321 	.ds 2
+      000012                        322 _addTIMER0Task_sloc1_1_0:
+      000012                        323 	.ds 2
+      000014                        324 _addTIMER0Task_sloc2_1_0:
+      000014                        325 	.ds 4
+      000018                        326 _delTIMER0Task_intag_1_18:
+      000018                        327 	.ds 2
+      00001A                        328 _delTIMER0Task_i_1_19:
+      00001A                        329 	.ds 2
+      00001C                        330 _updateTIMER0_i_1_24:
+      00001C                        331 	.ds 2
+                                    332 ;--------------------------------------------------------
+                                    333 ; overlayable items in internal ram 
+                                    334 ;--------------------------------------------------------
+                                    335 	.area	OSEG    (OVR,DATA)
+                                    336 	.area	OSEG    (OVR,DATA)
+                                    337 	.area	OSEG    (OVR,DATA)
+                                    338 ;--------------------------------------------------------
+                                    339 ; indirectly addressable internal ram data
+                                    340 ;--------------------------------------------------------
+                                    341 	.area ISEG    (DATA)
+                                    342 ;--------------------------------------------------------
+                                    343 ; absolute internal ram data
+                                    344 ;--------------------------------------------------------
+                                    345 	.area IABS    (ABS,DATA)
+                                    346 	.area IABS    (ABS,DATA)
+                                    347 ;--------------------------------------------------------
+                                    348 ; bit data
+                                    349 ;--------------------------------------------------------
+                                    350 	.area BSEG    (BIT)
+                                    351 ;--------------------------------------------------------
+                                    352 ; paged external ram data
+                                    353 ;--------------------------------------------------------
+                                    354 	.area PSEG    (PAG,XDATA)
+                                    355 ;--------------------------------------------------------
+                                    356 ; external ram data
+                                    357 ;--------------------------------------------------------
+                                    358 	.area XSEG    (XDATA)
+      000000                        359 _timer0TaskStruct::
+      000000                        360 	.ds 120
+                                    361 ;--------------------------------------------------------
+                                    362 ; absolute external ram data
+                                    363 ;--------------------------------------------------------
+                                    364 	.area XABS    (ABS,XDATA)
+                                    365 ;--------------------------------------------------------
+                                    366 ; external initialized ram data
+                                    367 ;--------------------------------------------------------
+                                    368 	.area XISEG   (XDATA)
+                                    369 	.area HOME    (CODE)
+                                    370 	.area GSINIT0 (CODE)
+                                    371 	.area GSINIT1 (CODE)
+                                    372 	.area GSINIT2 (CODE)
+                                    373 	.area GSINIT3 (CODE)
+                                    374 	.area GSINIT4 (CODE)
+                                    375 	.area GSINIT5 (CODE)
+                                    376 	.area GSINIT  (CODE)
+                                    377 	.area GSFINAL (CODE)
+                                    378 	.area CSEG    (CODE)
+                                    379 ;--------------------------------------------------------
+                                    380 ; global & static initialisations
+                                    381 ;--------------------------------------------------------
+                                    382 	.area HOME    (CODE)
+                                    383 	.area GSINIT  (CODE)
+                                    384 	.area GSFINAL (CODE)
+                                    385 	.area GSINIT  (CODE)
+                                    386 ;	TIMER/TIMER.c:14: unsigned long timerClock = 0;
+      000000 E4               [12]  387 	clr	a
+      000001 F5*00            [12]  388 	mov	_timerClock,a
+      000003 F5*01            [12]  389 	mov	(_timerClock + 1),a
+      000005 F5*02            [12]  390 	mov	(_timerClock + 2),a
+      000007 F5*03            [12]  391 	mov	(_timerClock + 3),a
+                                    392 ;	TIMER/TIMER.c:16: unsigned int timerCount = 20;  //定义初始定时周期
+      000009 75*04 14         [24]  393 	mov	_timerCount,#0x14
+                                    394 ;	1-genFromRTrack replaced	mov	(_timerCount + 1),#0x00
+      00000C F5*05            [12]  395 	mov	(_timerCount + 1),a
+                                    396 ;	TIMER/TIMER.c:17: int taskCount = 0;
+      00000E F5*06            [12]  397 	mov	_taskCount,a
+      000010 F5*07            [12]  398 	mov	(_taskCount + 1),a
+                                    399 ;--------------------------------------------------------
+                                    400 ; Home
+                                    401 ;--------------------------------------------------------
+                                    402 	.area HOME    (CODE)
+                                    403 	.area HOME    (CODE)
+                                    404 ;--------------------------------------------------------
+                                    405 ; code
+                                    406 ;--------------------------------------------------------
+                                    407 	.area CSEG    (CODE)
+                                    408 ;------------------------------------------------------------
+                                    409 ;Allocation info for local variables in function 'Timer0Start'
+                                    410 ;------------------------------------------------------------
+                                    411 ;	TIMER/TIMER.c:25: void Timer0Start()
+                                    412 ;	-----------------------------------------
+                                    413 ;	 function Timer0Start
+                                    414 ;	-----------------------------------------
+      000000                        415 _Timer0Start:
+                           000007   416 	ar7 = 0x07
+                           000006   417 	ar6 = 0x06
+                           000005   418 	ar5 = 0x05
+                           000004   419 	ar4 = 0x04
+                           000003   420 	ar3 = 0x03
+                           000002   421 	ar2 = 0x02
+                           000001   422 	ar1 = 0x01
+                           000000   423 	ar0 = 0x00
+                                    424 ;	TIMER/TIMER.c:27: TR0 = 1;      //开启定时器
+      000000 D2 8C            [12]  425 	setb	_TR0
+      000002 22               [24]  426 	ret
+                                    427 ;------------------------------------------------------------
+                                    428 ;Allocation info for local variables in function 'Timer0Stop'
+                                    429 ;------------------------------------------------------------
+                                    430 ;	TIMER/TIMER.c:35: void Timer0Stop()
+                                    431 ;	-----------------------------------------
+                                    432 ;	 function Timer0Stop
+                                    433 ;	-----------------------------------------
+      000003                        434 _Timer0Stop:
+                                    435 ;	TIMER/TIMER.c:37: TR0 = 0;      //停止定时器
+      000003 C2 8C            [12]  436 	clr	_TR0
+      000005 22               [24]  437 	ret
+                                    438 ;------------------------------------------------------------
+                                    439 ;Allocation info for local variables in function 'timer0SetValue'
+                                    440 ;------------------------------------------------------------
+                                    441 ;value                     Allocated to registers r6 r7 
+                                    442 ;------------------------------------------------------------
+                                    443 ;	TIMER/TIMER.c:45: void timer0SetValue(unsigned int value)
+                                    444 ;	-----------------------------------------
+                                    445 ;	 function timer0SetValue
+                                    446 ;	-----------------------------------------
+      000006                        447 _timer0SetValue:
+      000006 AE 82            [24]  448 	mov	r6,dpl
+      000008 AF 83            [24]  449 	mov	r7,dph
+                                    450 ;	TIMER/TIMER.c:47: value = value * 928;
+      00000A 8E*00            [24]  451 	mov	__mulint_PARM_2,r6
+      00000C 8F*01            [24]  452 	mov	(__mulint_PARM_2 + 1),r7
+      00000E 90 03 A0         [24]  453 	mov	dptr,#0x03A0
+      000011 12r00r00         [24]  454 	lcall	__mulint
+      000014 AE 82            [24]  455 	mov	r6,dpl
+      000016 AF 83            [24]  456 	mov	r7,dph
+                                    457 ;	TIMER/TIMER.c:48: value = 0xFFFF-value;
+      000018 74 FF            [12]  458 	mov	a,#0xFF
+      00001A C3               [12]  459 	clr	c
+      00001B 9E               [12]  460 	subb	a,r6
+      00001C FE               [12]  461 	mov	r6,a
+      00001D 74 FF            [12]  462 	mov	a,#0xFF
+      00001F 9F               [12]  463 	subb	a,r7
+                                    464 ;	TIMER/TIMER.c:49: TH0 = (value>>8) & 0xFF;   //设置定时时间
+      000020 FD               [12]  465 	mov	r5,a
+      000021 8D 8C            [24]  466 	mov	_TH0,r5
+                                    467 ;	TIMER/TIMER.c:50: TL0 =  value     & 0xFF;
+      000023 8E 8A            [24]  468 	mov	_TL0,r6
+      000025 22               [24]  469 	ret
+                                    470 ;------------------------------------------------------------
+                                    471 ;Allocation info for local variables in function 'time0Init'
+                                    472 ;------------------------------------------------------------
+                                    473 ;i                         Allocated to registers r6 r7 
+                                    474 ;------------------------------------------------------------
+                                    475 ;	TIMER/TIMER.c:58: void time0Init()
+                                    476 ;	-----------------------------------------
+                                    477 ;	 function time0Init
+                                    478 ;	-----------------------------------------
+      000026                        479 _time0Init:
+                                    480 ;	TIMER/TIMER.c:61: for(i = 0; i < timer0TaskCount; i++)
+      000026 7E 00            [12]  481 	mov	r6,#0x00
+      000028 7F 00            [12]  482 	mov	r7,#0x00
+      00002A 7C 00            [12]  483 	mov	r4,#0x00
+      00002C 7D 00            [12]  484 	mov	r5,#0x00
+      00002E                        485 00102$:
+                                    486 ;	TIMER/TIMER.c:63: timer0TaskStruct[i].TimerFun0 = NULL;
+      00002E EC               [12]  487 	mov	a,r4
+      00002F 24r00            [12]  488 	add	a,#_timer0TaskStruct
+      000031 FA               [12]  489 	mov	r2,a
+      000032 ED               [12]  490 	mov	a,r5
+      000033 34s00            [12]  491 	addc	a,#(_timer0TaskStruct >> 8)
+      000035 FB               [12]  492 	mov	r3,a
+      000036 8A 82            [24]  493 	mov	dpl,r2
+      000038 8B 83            [24]  494 	mov	dph,r3
+      00003A A3               [24]  495 	inc	dptr
+      00003B A3               [24]  496 	inc	dptr
+      00003C A3               [24]  497 	inc	dptr
+      00003D A3               [24]  498 	inc	dptr
+      00003E E4               [12]  499 	clr	a
+      00003F F0               [24]  500 	movx	@dptr,a
+      000040 A3               [24]  501 	inc	dptr
+      000041 F0               [24]  502 	movx	@dptr,a
+                                    503 ;	TIMER/TIMER.c:64: taskCount = 0;
+      000042 F5*06            [12]  504 	mov	_taskCount,a
+      000044 F5*07            [12]  505 	mov	(_taskCount + 1),a
+                                    506 ;	TIMER/TIMER.c:61: for(i = 0; i < timer0TaskCount; i++)
+      000046 74 0C            [12]  507 	mov	a,#0x0C
+      000048 2C               [12]  508 	add	a,r4
+      000049 FC               [12]  509 	mov	r4,a
+      00004A E4               [12]  510 	clr	a
+      00004B 3D               [12]  511 	addc	a,r5
+      00004C FD               [12]  512 	mov	r5,a
+      00004D 0E               [12]  513 	inc	r6
+      00004E BE 00 01         [24]  514 	cjne	r6,#0x00,00113$
+      000051 0F               [12]  515 	inc	r7
+      000052                        516 00113$:
+      000052 C3               [12]  517 	clr	c
+      000053 EE               [12]  518 	mov	a,r6
+      000054 94 0A            [12]  519 	subb	a,#0x0A
+      000056 EF               [12]  520 	mov	a,r7
+      000057 64 80            [12]  521 	xrl	a,#0x80
+      000059 94 80            [12]  522 	subb	a,#0x80
+      00005B 40 D1            [24]  523 	jc	00102$
+                                    524 ;	TIMER/TIMER.c:67: EA = 1;  //开中断
+      00005D D2 AF            [12]  525 	setb	_EA
+                                    526 ;	TIMER/TIMER.c:69: TMOD = 0x01;  //使能模式1
+      00005F 75 89 01         [24]  527 	mov	_TMOD,#0x01
+                                    528 ;	TIMER/TIMER.c:70: timer0SetValue(timerCount);
+      000062 85*04 82         [24]  529 	mov	dpl,_timerCount
+      000065 85*05 83         [24]  530 	mov	dph,(_timerCount + 1)
+      000068 12r00r06         [24]  531 	lcall	_timer0SetValue
+                                    532 ;	TIMER/TIMER.c:71: ET0 = 1;  //开定时器0的中断
+      00006B D2 A9            [12]  533 	setb	_ET0
+                                    534 ;	TIMER/TIMER.c:72: Timer0Start();
+      00006D 02r00r00         [24]  535 	ljmp	_Timer0Start
+                                    536 ;------------------------------------------------------------
+                                    537 ;Allocation info for local variables in function 'getTaskCount'
+                                    538 ;------------------------------------------------------------
+                                    539 ;	TIMER/TIMER.c:81: int getTaskCount()
+                                    540 ;	-----------------------------------------
+                                    541 ;	 function getTaskCount
+                                    542 ;	-----------------------------------------
+      000070                        543 _getTaskCount:
+                                    544 ;	TIMER/TIMER.c:83: return taskCount;
+      000070 85*06 82         [24]  545 	mov	dpl,_taskCount
+      000073 85*07 83         [24]  546 	mov	dph,(_taskCount + 1)
+      000076 22               [24]  547 	ret
+                                    548 ;------------------------------------------------------------
+                                    549 ;Allocation info for local variables in function 'addTIMER0Task'
+                                    550 ;------------------------------------------------------------
+                                    551 ;inTimerFun0               Allocated with name '_addTIMER0Task_PARM_2'
+                                    552 ;intag                     Allocated with name '_addTIMER0Task_PARM_3'
+                                    553 ;inTimerMs                 Allocated with name '_addTIMER0Task_inTimerMs_1_13'
+                                    554 ;i                         Allocated to registers r4 r5 
+                                    555 ;sloc0                     Allocated with name '_addTIMER0Task_sloc0_1_0'
+                                    556 ;sloc1                     Allocated with name '_addTIMER0Task_sloc1_1_0'
+                                    557 ;sloc2                     Allocated with name '_addTIMER0Task_sloc2_1_0'
+                                    558 ;------------------------------------------------------------
+                                    559 ;	TIMER/TIMER.c:93: void addTIMER0Task(unsigned int inTimerMs,void (*inTimerFun0)(),int intag)
+                                    560 ;	-----------------------------------------
+                                    561 ;	 function addTIMER0Task
+                                    562 ;	-----------------------------------------
+      000077                        563 _addTIMER0Task:
+      000077 85 82*0E         [24]  564 	mov	_addTIMER0Task_inTimerMs_1_13,dpl
+      00007A 85 83*0F         [24]  565 	mov	(_addTIMER0Task_inTimerMs_1_13 + 1),dph
+                                    566 ;	TIMER/TIMER.c:96: if(taskCount == 0) //在添加第一次任务时，会初始化。
+      00007D E5*06            [12]  567 	mov	a,_taskCount
+      00007F 45*07            [12]  568 	orl	a,(_taskCount + 1)
+      000081 70 03            [24]  569 	jnz	00112$
+                                    570 ;	TIMER/TIMER.c:98: time0Init();
+      000083 12r00r26         [24]  571 	lcall	_time0Init
+                                    572 ;	TIMER/TIMER.c:100: for(i = 0; i < timer0TaskCount; i++)
+      000086                        573 00112$:
+      000086 7C 00            [12]  574 	mov	r4,#0x00
+      000088 7D 00            [12]  575 	mov	r5,#0x00
+      00008A 7A 00            [12]  576 	mov	r2,#0x00
+      00008C 7B 00            [12]  577 	mov	r3,#0x00
+      00008E                        578 00106$:
+                                    579 ;	TIMER/TIMER.c:102: if(timer0TaskStruct[i].TimerFun0 == NULL)
+      00008E EA               [12]  580 	mov	a,r2
+      00008F 24r00            [12]  581 	add	a,#_timer0TaskStruct
+      000091 F5*12            [12]  582 	mov	_addTIMER0Task_sloc1_1_0,a
+      000093 EB               [12]  583 	mov	a,r3
+      000094 34s00            [12]  584 	addc	a,#(_timer0TaskStruct >> 8)
+      000096 F5*13            [12]  585 	mov	(_addTIMER0Task_sloc1_1_0 + 1),a
+      000098 74 04            [12]  586 	mov	a,#0x04
+      00009A 25*12            [12]  587 	add	a,_addTIMER0Task_sloc1_1_0
+      00009C F5*10            [12]  588 	mov	_addTIMER0Task_sloc0_1_0,a
+      00009E E4               [12]  589 	clr	a
+      00009F 35*13            [12]  590 	addc	a,(_addTIMER0Task_sloc1_1_0 + 1)
+      0000A1 F5*11            [12]  591 	mov	(_addTIMER0Task_sloc0_1_0 + 1),a
+      0000A3 85*10 82         [24]  592 	mov	dpl,_addTIMER0Task_sloc0_1_0
+      0000A6 85*11 83         [24]  593 	mov	dph,(_addTIMER0Task_sloc0_1_0 + 1)
+      0000A9 E0               [24]  594 	movx	a,@dptr
+      0000AA FE               [12]  595 	mov	r6,a
+      0000AB A3               [24]  596 	inc	dptr
+      0000AC E0               [24]  597 	movx	a,@dptr
+      0000AD FF               [12]  598 	mov	r7,a
+      0000AE 4E               [12]  599 	orl	a,r6
+      0000AF 70 76            [24]  600 	jnz	00107$
+                                    601 ;	TIMER/TIMER.c:104: timer0TaskStruct[i].TimerFun0 = inTimerFun0;
+      0000B1 85*10 82         [24]  602 	mov	dpl,_addTIMER0Task_sloc0_1_0
+      0000B4 85*11 83         [24]  603 	mov	dph,(_addTIMER0Task_sloc0_1_0 + 1)
+      0000B7 E5*0A            [12]  604 	mov	a,_addTIMER0Task_PARM_2
+      0000B9 F0               [24]  605 	movx	@dptr,a
+      0000BA E5*0B            [12]  606 	mov	a,(_addTIMER0Task_PARM_2 + 1)
+      0000BC A3               [24]  607 	inc	dptr
+      0000BD F0               [24]  608 	movx	@dptr,a
+                                    609 ;	TIMER/TIMER.c:105: timer0TaskStruct[i].tag = intag;
+      0000BE 85*12 82         [24]  610 	mov	dpl,_addTIMER0Task_sloc1_1_0
+      0000C1 85*13 83         [24]  611 	mov	dph,(_addTIMER0Task_sloc1_1_0 + 1)
+      0000C4 A3               [24]  612 	inc	dptr
+      0000C5 A3               [24]  613 	inc	dptr
+      0000C6 A3               [24]  614 	inc	dptr
+      0000C7 A3               [24]  615 	inc	dptr
+      0000C8 A3               [24]  616 	inc	dptr
+      0000C9 A3               [24]  617 	inc	dptr
+      0000CA E5*0C            [12]  618 	mov	a,_addTIMER0Task_PARM_3
+      0000CC F0               [24]  619 	movx	@dptr,a
+      0000CD E5*0D            [12]  620 	mov	a,(_addTIMER0Task_PARM_3 + 1)
+      0000CF A3               [24]  621 	inc	dptr
+      0000D0 F0               [24]  622 	movx	@dptr,a
+                                    623 ;	TIMER/TIMER.c:106: timer0TaskStruct[i].time = timerClock + inTimerMs;
+      0000D1 85*0E*14         [24]  624 	mov	_addTIMER0Task_sloc2_1_0,_addTIMER0Task_inTimerMs_1_13
+      0000D4 85*0F*15         [24]  625 	mov	(_addTIMER0Task_sloc2_1_0 + 1),(_addTIMER0Task_inTimerMs_1_13 + 1)
+      0000D7 E4               [12]  626 	clr	a
+      0000D8 F5*16            [12]  627 	mov	(_addTIMER0Task_sloc2_1_0 + 2),a
+      0000DA F5*17            [12]  628 	mov	(_addTIMER0Task_sloc2_1_0 + 3),a
+      0000DC E5*14            [12]  629 	mov	a,_addTIMER0Task_sloc2_1_0
+      0000DE 25*00            [12]  630 	add	a,_timerClock
+      0000E0 F8               [12]  631 	mov	r0,a
+      0000E1 E5*15            [12]  632 	mov	a,(_addTIMER0Task_sloc2_1_0 + 1)
+      0000E3 35*01            [12]  633 	addc	a,(_timerClock + 1)
+      0000E5 F9               [12]  634 	mov	r1,a
+      0000E6 E5*16            [12]  635 	mov	a,(_addTIMER0Task_sloc2_1_0 + 2)
+      0000E8 35*02            [12]  636 	addc	a,(_timerClock + 2)
+      0000EA FE               [12]  637 	mov	r6,a
+      0000EB E5*17            [12]  638 	mov	a,(_addTIMER0Task_sloc2_1_0 + 3)
+      0000ED 35*03            [12]  639 	addc	a,(_timerClock + 3)
+      0000EF FF               [12]  640 	mov	r7,a
+      0000F0 85*12 82         [24]  641 	mov	dpl,_addTIMER0Task_sloc1_1_0
+      0000F3 85*13 83         [24]  642 	mov	dph,(_addTIMER0Task_sloc1_1_0 + 1)
+      0000F6 E8               [12]  643 	mov	a,r0
+      0000F7 F0               [24]  644 	movx	@dptr,a
+      0000F8 E9               [12]  645 	mov	a,r1
+      0000F9 A3               [24]  646 	inc	dptr
+      0000FA F0               [24]  647 	movx	@dptr,a
+      0000FB EE               [12]  648 	mov	a,r6
+      0000FC A3               [24]  649 	inc	dptr
+      0000FD F0               [24]  650 	movx	@dptr,a
+      0000FE EF               [12]  651 	mov	a,r7
+      0000FF A3               [24]  652 	inc	dptr
+      000100 F0               [24]  653 	movx	@dptr,a
+                                    654 ;	TIMER/TIMER.c:107: timer0TaskStruct[i].timeBack = inTimerMs;
+      000101 85*12 82         [24]  655 	mov	dpl,_addTIMER0Task_sloc1_1_0
+      000104 85*13 83         [24]  656 	mov	dph,(_addTIMER0Task_sloc1_1_0 + 1)
+      000107 A3               [24]  657 	inc	dptr
+      000108 A3               [24]  658 	inc	dptr
+      000109 A3               [24]  659 	inc	dptr
+      00010A A3               [24]  660 	inc	dptr
+      00010B A3               [24]  661 	inc	dptr
+      00010C A3               [24]  662 	inc	dptr
+      00010D A3               [24]  663 	inc	dptr
+      00010E A3               [24]  664 	inc	dptr
+      00010F E5*14            [12]  665 	mov	a,_addTIMER0Task_sloc2_1_0
+      000111 F0               [24]  666 	movx	@dptr,a
+      000112 E5*15            [12]  667 	mov	a,(_addTIMER0Task_sloc2_1_0 + 1)
+      000114 A3               [24]  668 	inc	dptr
+      000115 F0               [24]  669 	movx	@dptr,a
+      000116 E5*16            [12]  670 	mov	a,(_addTIMER0Task_sloc2_1_0 + 2)
+      000118 A3               [24]  671 	inc	dptr
+      000119 F0               [24]  672 	movx	@dptr,a
+      00011A E5*17            [12]  673 	mov	a,(_addTIMER0Task_sloc2_1_0 + 3)
+      00011C A3               [24]  674 	inc	dptr
+      00011D F0               [24]  675 	movx	@dptr,a
+                                    676 ;	TIMER/TIMER.c:108: taskCount++;
+      00011E 05*06            [12]  677 	inc	_taskCount
+      000120 E4               [12]  678 	clr	a
+                                    679 ;	TIMER/TIMER.c:109: break;
+      000121 B5*06 1D         [24]  680 	cjne	a,_taskCount,00108$
+      000124 05*07            [12]  681 	inc	(_taskCount + 1)
+      000126 22               [24]  682 	ret
+      000127                        683 00107$:
+                                    684 ;	TIMER/TIMER.c:100: for(i = 0; i < timer0TaskCount; i++)
+      000127 74 0C            [12]  685 	mov	a,#0x0C
+      000129 2A               [12]  686 	add	a,r2
+      00012A FA               [12]  687 	mov	r2,a
+      00012B E4               [12]  688 	clr	a
+      00012C 3B               [12]  689 	addc	a,r3
+      00012D FB               [12]  690 	mov	r3,a
+      00012E 0C               [12]  691 	inc	r4
+      00012F BC 00 01         [24]  692 	cjne	r4,#0x00,00122$
+      000132 0D               [12]  693 	inc	r5
+      000133                        694 00122$:
+      000133 C3               [12]  695 	clr	c
+      000134 EC               [12]  696 	mov	a,r4
+      000135 94 0A            [12]  697 	subb	a,#0x0A
+      000137 ED               [12]  698 	mov	a,r5
+      000138 64 80            [12]  699 	xrl	a,#0x80
+      00013A 94 80            [12]  700 	subb	a,#0x80
+      00013C 50 03            [24]  701 	jnc	00123$
+      00013E 02r00r8E         [24]  702 	ljmp	00106$
+      000141                        703 00123$:
+      000141                        704 00108$:
+      000141 22               [24]  705 	ret
+                                    706 ;------------------------------------------------------------
+                                    707 ;Allocation info for local variables in function 'delTIMER0Task'
+                                    708 ;------------------------------------------------------------
+                                    709 ;intag                     Allocated with name '_delTIMER0Task_intag_1_18'
+                                    710 ;i                         Allocated with name '_delTIMER0Task_i_1_19'
+                                    711 ;------------------------------------------------------------
+                                    712 ;	TIMER/TIMER.c:120: void delTIMER0Task(int intag)
+                                    713 ;	-----------------------------------------
+                                    714 ;	 function delTIMER0Task
+                                    715 ;	-----------------------------------------
+      000142                        716 _delTIMER0Task:
+      000142 85 82*18         [24]  717 	mov	_delTIMER0Task_intag_1_18,dpl
+      000145 85 83*19         [24]  718 	mov	(_delTIMER0Task_intag_1_18 + 1),dph
+                                    719 ;	TIMER/TIMER.c:123: for(i = 0; i < timer0TaskCount; i++)
+      000148 E4               [12]  720 	clr	a
+      000149 F5*1A            [12]  721 	mov	_delTIMER0Task_i_1_19,a
+      00014B F5*1B            [12]  722 	mov	(_delTIMER0Task_i_1_19 + 1),a
+      00014D 7A 00            [12]  723 	mov	r2,#0x00
+      00014F 7B 00            [12]  724 	mov	r3,#0x00
+      000151                        725 00106$:
+                                    726 ;	TIMER/TIMER.c:125: if(timer0TaskStruct[i].tag == intag)
+      000151 EA               [12]  727 	mov	a,r2
+      000152 24r00            [12]  728 	add	a,#_timer0TaskStruct
+      000154 F8               [12]  729 	mov	r0,a
+      000155 EB               [12]  730 	mov	a,r3
+      000156 34s00            [12]  731 	addc	a,#(_timer0TaskStruct >> 8)
+      000158 F9               [12]  732 	mov	r1,a
+      000159 74 06            [12]  733 	mov	a,#0x06
+      00015B 28               [12]  734 	add	a,r0
+      00015C F5 82            [12]  735 	mov	dpl,a
+      00015E E4               [12]  736 	clr	a
+      00015F 39               [12]  737 	addc	a,r1
+      000160 F5 83            [12]  738 	mov	dph,a
+      000162 E0               [24]  739 	movx	a,@dptr
+      000163 FE               [12]  740 	mov	r6,a
+      000164 A3               [24]  741 	inc	dptr
+      000165 E0               [24]  742 	movx	a,@dptr
+      000166 FF               [12]  743 	mov	r7,a
+      000167 AC*18            [24]  744 	mov	r4,_delTIMER0Task_intag_1_18
+      000169 AD*19            [24]  745 	mov	r5,(_delTIMER0Task_intag_1_18 + 1)
+      00016B EE               [12]  746 	mov	a,r6
+      00016C B5 04 2C         [24]  747 	cjne	a,ar4,00107$
+      00016F EF               [12]  748 	mov	a,r7
+      000170 B5 05 28         [24]  749 	cjne	a,ar5,00107$
+                                    750 ;	TIMER/TIMER.c:127: timer0TaskStruct[i].TimerFun0 = NULL;
+      000173 88 82            [24]  751 	mov	dpl,r0
+      000175 89 83            [24]  752 	mov	dph,r1
+      000177 A3               [24]  753 	inc	dptr
+      000178 A3               [24]  754 	inc	dptr
+      000179 A3               [24]  755 	inc	dptr
+      00017A A3               [24]  756 	inc	dptr
+      00017B E4               [12]  757 	clr	a
+      00017C F0               [24]  758 	movx	@dptr,a
+      00017D A3               [24]  759 	inc	dptr
+      00017E F0               [24]  760 	movx	@dptr,a
+                                    761 ;	TIMER/TIMER.c:128: taskCount--;
+      00017F 15*06            [12]  762 	dec	_taskCount
+      000181 74 FF            [12]  763 	mov	a,#0xFF
+      000183 B5*06 02         [24]  764 	cjne	a,_taskCount,00121$
+      000186 15*07            [12]  765 	dec	(_taskCount + 1)
+      000188                        766 00121$:
+                                    767 ;	TIMER/TIMER.c:129: if(taskCount <= 0)
+      000188 C3               [12]  768 	clr	c
+      000189 E4               [12]  769 	clr	a
+      00018A 95*06            [12]  770 	subb	a,_taskCount
+      00018C 74 80            [12]  771 	mov	a,#(0x00 ^ 0x80)
+      00018E 85*07 F0         [24]  772 	mov	b,(_taskCount + 1)
+      000191 63 F0 80         [24]  773 	xrl	b,#0x80
+      000194 95 F0            [12]  774 	subb	a,b
+      000196 40 1F            [24]  775 	jc	00108$
+                                    776 ;	TIMER/TIMER.c:131: Timer0Stop();
+                                    777 ;	TIMER/TIMER.c:133: break;
+      000198 02r00r03         [24]  778 	ljmp	_Timer0Stop
+      00019B                        779 00107$:
+                                    780 ;	TIMER/TIMER.c:123: for(i = 0; i < timer0TaskCount; i++)
+      00019B 74 0C            [12]  781 	mov	a,#0x0C
+      00019D 2A               [12]  782 	add	a,r2
+      00019E FA               [12]  783 	mov	r2,a
+      00019F E4               [12]  784 	clr	a
+      0001A0 3B               [12]  785 	addc	a,r3
+      0001A1 FB               [12]  786 	mov	r3,a
+      0001A2 05*1A            [12]  787 	inc	_delTIMER0Task_i_1_19
+      0001A4 E4               [12]  788 	clr	a
+      0001A5 B5*1A 02         [24]  789 	cjne	a,_delTIMER0Task_i_1_19,00123$
+      0001A8 05*1B            [12]  790 	inc	(_delTIMER0Task_i_1_19 + 1)
+      0001AA                        791 00123$:
+      0001AA C3               [12]  792 	clr	c
+      0001AB E5*1A            [12]  793 	mov	a,_delTIMER0Task_i_1_19
+      0001AD 94 0A            [12]  794 	subb	a,#0x0A
+      0001AF E5*1B            [12]  795 	mov	a,(_delTIMER0Task_i_1_19 + 1)
+      0001B1 64 80            [12]  796 	xrl	a,#0x80
+      0001B3 94 80            [12]  797 	subb	a,#0x80
+      0001B5 40 9A            [24]  798 	jc	00106$
+      0001B7                        799 00108$:
+      0001B7 22               [24]  800 	ret
+                                    801 ;------------------------------------------------------------
+                                    802 ;Allocation info for local variables in function 'InterruptTimer0'
+                                    803 ;------------------------------------------------------------
+                                    804 ;	TIMER/TIMER.c:143: void InterruptTimer0() __interrupt 1
+                                    805 ;	-----------------------------------------
+                                    806 ;	 function InterruptTimer0
+                                    807 ;	-----------------------------------------
+      0001B8                        808 _InterruptTimer0:
+      0001B8 C0*00            [24]  809 	push	bits
+      0001BA C0 E0            [24]  810 	push	acc
+      0001BC C0 F0            [24]  811 	push	b
+      0001BE C0 82            [24]  812 	push	dpl
+      0001C0 C0 83            [24]  813 	push	dph
+      0001C2 C0 07            [24]  814 	push	(0+7)
+      0001C4 C0 06            [24]  815 	push	(0+6)
+      0001C6 C0 05            [24]  816 	push	(0+5)
+      0001C8 C0 04            [24]  817 	push	(0+4)
+      0001CA C0 03            [24]  818 	push	(0+3)
+      0001CC C0 02            [24]  819 	push	(0+2)
+      0001CE C0 01            [24]  820 	push	(0+1)
+      0001D0 C0 00            [24]  821 	push	(0+0)
+      0001D2 C0 D0            [24]  822 	push	psw
+      0001D4 75 D0 00         [24]  823 	mov	psw,#0x00
+                                    824 ;	TIMER/TIMER.c:145: timerClock += timerCount;
+      0001D7 AC*04            [24]  825 	mov	r4,_timerCount
+      0001D9 AD*05            [24]  826 	mov	r5,(_timerCount + 1)
+      0001DB E4               [12]  827 	clr	a
+      0001DC FE               [12]  828 	mov	r6,a
+      0001DD FF               [12]  829 	mov	r7,a
+      0001DE EC               [12]  830 	mov	a,r4
+      0001DF 25*00            [12]  831 	add	a,_timerClock
+      0001E1 F5*00            [12]  832 	mov	_timerClock,a
+      0001E3 ED               [12]  833 	mov	a,r5
+      0001E4 35*01            [12]  834 	addc	a,(_timerClock + 1)
+      0001E6 F5*01            [12]  835 	mov	(_timerClock + 1),a
+      0001E8 EE               [12]  836 	mov	a,r6
+      0001E9 35*02            [12]  837 	addc	a,(_timerClock + 2)
+      0001EB F5*02            [12]  838 	mov	(_timerClock + 2),a
+      0001ED EF               [12]  839 	mov	a,r7
+      0001EE 35*03            [12]  840 	addc	a,(_timerClock + 3)
+      0001F0 F5*03            [12]  841 	mov	(_timerClock + 3),a
+                                    842 ;	TIMER/TIMER.c:146: timer0SetValue(timerCount);
+      0001F2 85*04 82         [24]  843 	mov	dpl,_timerCount
+      0001F5 85*05 83         [24]  844 	mov	dph,(_timerCount + 1)
+      0001F8 12r00r06         [24]  845 	lcall	_timer0SetValue
+      0001FB D0 D0            [24]  846 	pop	psw
+      0001FD D0 00            [24]  847 	pop	(0+0)
+      0001FF D0 01            [24]  848 	pop	(0+1)
+      000201 D0 02            [24]  849 	pop	(0+2)
+      000203 D0 03            [24]  850 	pop	(0+3)
+      000205 D0 04            [24]  851 	pop	(0+4)
+      000207 D0 05            [24]  852 	pop	(0+5)
+      000209 D0 06            [24]  853 	pop	(0+6)
+      00020B D0 07            [24]  854 	pop	(0+7)
+      00020D D0 83            [24]  855 	pop	dph
+      00020F D0 82            [24]  856 	pop	dpl
+      000211 D0 F0            [24]  857 	pop	b
+      000213 D0 E0            [24]  858 	pop	acc
+      000215 D0*00            [24]  859 	pop	bits
+      000217 32               [24]  860 	reti
+                                    861 ;------------------------------------------------------------
+                                    862 ;Allocation info for local variables in function 'updateTIMER0'
+                                    863 ;------------------------------------------------------------
+                                    864 ;i                         Allocated with name '_updateTIMER0_i_1_24'
+                                    865 ;------------------------------------------------------------
+                                    866 ;	TIMER/TIMER.c:154: void updateTIMER0()
+                                    867 ;	-----------------------------------------
+                                    868 ;	 function updateTIMER0
+                                    869 ;	-----------------------------------------
+      000218                        870 _updateTIMER0:
+                                    871 ;	TIMER/TIMER.c:157: for(i = 0; i < timer0TaskCount; i++)
+      000218 E4               [12]  872 	clr	a
+      000219 F5*1C            [12]  873 	mov	_updateTIMER0_i_1_24,a
+      00021B F5*1D            [12]  874 	mov	(_updateTIMER0_i_1_24 + 1),a
+      00021D 7C 00            [12]  875 	mov	r4,#0x00
+      00021F 7D 00            [12]  876 	mov	r5,#0x00
+      000221                        877 00106$:
+                                    878 ;	TIMER/TIMER.c:159: if(timer0TaskStruct[i].TimerFun0 != NULL)
+      000221 EC               [12]  879 	mov	a,r4
+      000222 24r00            [12]  880 	add	a,#_timer0TaskStruct
+      000224 FA               [12]  881 	mov	r2,a
+      000225 ED               [12]  882 	mov	a,r5
+      000226 34s00            [12]  883 	addc	a,#(_timer0TaskStruct >> 8)
+      000228 FB               [12]  884 	mov	r3,a
+      000229 8A 82            [24]  885 	mov	dpl,r2
+      00022B 8B 83            [24]  886 	mov	dph,r3
+      00022D A3               [24]  887 	inc	dptr
+      00022E A3               [24]  888 	inc	dptr
+      00022F A3               [24]  889 	inc	dptr
+      000230 A3               [24]  890 	inc	dptr
+      000231 E0               [24]  891 	movx	a,@dptr
+      000232 F8               [12]  892 	mov	r0,a
+      000233 A3               [24]  893 	inc	dptr
+      000234 E0               [24]  894 	movx	a,@dptr
+      000235 F9               [12]  895 	mov	r1,a
+      000236 48               [12]  896 	orl	a,r0
+      000237 60 78            [24]  897 	jz	00107$
+                                    898 ;	TIMER/TIMER.c:161: if(timer0TaskStruct[i].time <= timerClock)
+      000239 C0 00            [24]  899 	push	ar0
+      00023B C0 01            [24]  900 	push	ar1
+      00023D 8A 82            [24]  901 	mov	dpl,r2
+      00023F 8B 83            [24]  902 	mov	dph,r3
+      000241 E0               [24]  903 	movx	a,@dptr
+      000242 F8               [12]  904 	mov	r0,a
+      000243 A3               [24]  905 	inc	dptr
+      000244 E0               [24]  906 	movx	a,@dptr
+      000245 F9               [12]  907 	mov	r1,a
+      000246 A3               [24]  908 	inc	dptr
+      000247 E0               [24]  909 	movx	a,@dptr
+      000248 FE               [12]  910 	mov	r6,a
+      000249 A3               [24]  911 	inc	dptr
+      00024A E0               [24]  912 	movx	a,@dptr
+      00024B FF               [12]  913 	mov	r7,a
+      00024C C3               [12]  914 	clr	c
+      00024D E5*00            [12]  915 	mov	a,_timerClock
+      00024F 98               [12]  916 	subb	a,r0
+      000250 E5*01            [12]  917 	mov	a,(_timerClock + 1)
+      000252 99               [12]  918 	subb	a,r1
+      000253 E5*02            [12]  919 	mov	a,(_timerClock + 2)
+      000255 9E               [12]  920 	subb	a,r6
+      000256 E5*03            [12]  921 	mov	a,(_timerClock + 3)
+      000258 9F               [12]  922 	subb	a,r7
+      000259 D0 01            [24]  923 	pop	ar1
+      00025B D0 00            [24]  924 	pop	ar0
+      00025D 40 52            [24]  925 	jc	00107$
+                                    926 ;	TIMER/TIMER.c:163: timer0TaskStruct[i].TimerFun0();    //调用函数
+      00025F C0 05            [24]  927 	push	ar5
+      000261 C0 04            [24]  928 	push	ar4
+      000263 C0 03            [24]  929 	push	ar3
+      000265 C0 02            [24]  930 	push	ar2
+      000267 C0 01            [24]  931 	push	ar1
+      000269 C0 00            [24]  932 	push	ar0
+      00026B 88 82            [24]  933 	mov	dpl,r0
+      00026D 89 83            [24]  934 	mov	dph,r1
+      00026F 12r00r00         [24]  935 	lcall	__sdcc_call_dptr
+      000272 D0 00            [24]  936 	pop	ar0
+      000274 D0 01            [24]  937 	pop	ar1
+      000276 D0 02            [24]  938 	pop	ar2
+      000278 D0 03            [24]  939 	pop	ar3
+      00027A D0 04            [24]  940 	pop	ar4
+      00027C D0 05            [24]  941 	pop	ar5
+                                    942 ;	TIMER/TIMER.c:164: timer0TaskStruct[i].time = \
+      00027E 74 08            [12]  943 	mov	a,#0x08
+      000280 2A               [12]  944 	add	a,r2
+      000281 F5 82            [12]  945 	mov	dpl,a
+      000283 E4               [12]  946 	clr	a
+      000284 3B               [12]  947 	addc	a,r3
+      000285 F5 83            [12]  948 	mov	dph,a
+      000287 E0               [24]  949 	movx	a,@dptr
+      000288 F8               [12]  950 	mov	r0,a
+      000289 A3               [24]  951 	inc	dptr
+      00028A E0               [24]  952 	movx	a,@dptr
+      00028B F9               [12]  953 	mov	r1,a
+      00028C A3               [24]  954 	inc	dptr
+      00028D E0               [24]  955 	movx	a,@dptr
+      00028E FE               [12]  956 	mov	r6,a
+      00028F A3               [24]  957 	inc	dptr
+      000290 E0               [24]  958 	movx	a,@dptr
+      000291 FF               [12]  959 	mov	r7,a
+      000292 E5*00            [12]  960 	mov	a,_timerClock
+      000294 28               [12]  961 	add	a,r0
+      000295 F8               [12]  962 	mov	r0,a
+      000296 E5*01            [12]  963 	mov	a,(_timerClock + 1)
+      000298 39               [12]  964 	addc	a,r1
+      000299 F9               [12]  965 	mov	r1,a
+      00029A E5*02            [12]  966 	mov	a,(_timerClock + 2)
+      00029C 3E               [12]  967 	addc	a,r6
+      00029D FE               [12]  968 	mov	r6,a
+      00029E E5*03            [12]  969 	mov	a,(_timerClock + 3)
+      0002A0 3F               [12]  970 	addc	a,r7
+      0002A1 FF               [12]  971 	mov	r7,a
+      0002A2 8A 82            [24]  972 	mov	dpl,r2
+      0002A4 8B 83            [24]  973 	mov	dph,r3
+      0002A6 E8               [12]  974 	mov	a,r0
+      0002A7 F0               [24]  975 	movx	@dptr,a
+      0002A8 E9               [12]  976 	mov	a,r1
+      0002A9 A3               [24]  977 	inc	dptr
+      0002AA F0               [24]  978 	movx	@dptr,a
+      0002AB EE               [12]  979 	mov	a,r6
+      0002AC A3               [24]  980 	inc	dptr
+      0002AD F0               [24]  981 	movx	@dptr,a
+      0002AE EF               [12]  982 	mov	a,r7
+      0002AF A3               [24]  983 	inc	dptr
+      0002B0 F0               [24]  984 	movx	@dptr,a
+      0002B1                        985 00107$:
+                                    986 ;	TIMER/TIMER.c:157: for(i = 0; i < timer0TaskCount; i++)
+      0002B1 74 0C            [12]  987 	mov	a,#0x0C
+      0002B3 2C               [12]  988 	add	a,r4
+      0002B4 FC               [12]  989 	mov	r4,a
+      0002B5 E4               [12]  990 	clr	a
+      0002B6 3D               [12]  991 	addc	a,r5
+      0002B7 FD               [12]  992 	mov	r5,a
+      0002B8 05*1C            [12]  993 	inc	_updateTIMER0_i_1_24
+      0002BA E4               [12]  994 	clr	a
+      0002BB B5*1C 02         [24]  995 	cjne	a,_updateTIMER0_i_1_24,00122$
+      0002BE 05*1D            [12]  996 	inc	(_updateTIMER0_i_1_24 + 1)
+      0002C0                        997 00122$:
+      0002C0 C3               [12]  998 	clr	c
+      0002C1 E5*1C            [12]  999 	mov	a,_updateTIMER0_i_1_24
+      0002C3 94 0A            [12] 1000 	subb	a,#0x0A
+      0002C5 E5*1D            [12] 1001 	mov	a,(_updateTIMER0_i_1_24 + 1)
+      0002C7 64 80            [12] 1002 	xrl	a,#0x80
+      0002C9 94 80            [12] 1003 	subb	a,#0x80
+      0002CB 50 03            [24] 1004 	jnc	00123$
+      0002CD 02r02r21         [24] 1005 	ljmp	00106$
+      0002D0                       1006 00123$:
+      0002D0 22               [24] 1007 	ret
+                                   1008 ;------------------------------------------------------------
+                                   1009 ;Allocation info for local variables in function 'delay10us'
+                                   1010 ;------------------------------------------------------------
+                                   1011 ;	TIMER/TIMER.c:177: void delay10us()
+                                   1012 ;	-----------------------------------------
+                                   1013 ;	 function delay10us
+                                   1014 ;	-----------------------------------------
+      0002D1                       1015 _delay10us:
+                                   1016 ;	TIMER/TIMER.c:186: __endasm;
+      0002D1 00               [12] 1017 	NOP
+      0002D2 00               [12] 1018 	NOP
+      0002D3 00               [12] 1019 	NOP
+      0002D4 00               [12] 1020 	NOP
+      0002D5 00               [12] 1021 	NOP
+      0002D6 00               [12] 1022 	NOP
+      0002D7 22               [24] 1023 	ret
+                                   1024 ;------------------------------------------------------------
+                                   1025 ;Allocation info for local variables in function 'delay10usValue'
+                                   1026 ;------------------------------------------------------------
+                                   1027 ;value                     Allocated to registers 
+                                   1028 ;------------------------------------------------------------
+                                   1029 ;	TIMER/TIMER.c:194: void delay10usValue(unsigned int value)
+                                   1030 ;	-----------------------------------------
+                                   1031 ;	 function delay10usValue
+                                   1032 ;	-----------------------------------------
+      0002D8                       1033 _delay10usValue:
+      0002D8 AE 82            [24] 1034 	mov	r6,dpl
+      0002DA AF 83            [24] 1035 	mov	r7,dph
+                                   1036 ;	TIMER/TIMER.c:196: while(value--)
+      0002DC                       1037 00101$:
+      0002DC 8E 04            [24] 1038 	mov	ar4,r6
+      0002DE 8F 05            [24] 1039 	mov	ar5,r7
+      0002E0 1E               [12] 1040 	dec	r6
+      0002E1 BE FF 01         [24] 1041 	cjne	r6,#0xFF,00113$
+      0002E4 1F               [12] 1042 	dec	r7
+      0002E5                       1043 00113$:
+      0002E5 EC               [12] 1044 	mov	a,r4
+      0002E6 4D               [12] 1045 	orl	a,r5
+      0002E7 60 05            [24] 1046 	jz	00104$
+                                   1047 ;	TIMER/TIMER.c:202: __endasm;
+      0002E9 00               [12] 1048 	NOP
+      0002EA 00               [12] 1049 	NOP
+      0002EB 00               [12] 1050 	NOP
+      0002EC 80 EE            [24] 1051 	sjmp	00101$
+      0002EE                       1052 00104$:
+      0002EE 22               [24] 1053 	ret
+                                   1054 ;------------------------------------------------------------
+                                   1055 ;Allocation info for local variables in function 'initTimer2'
+                                   1056 ;------------------------------------------------------------
+                                   1057 ;value                     Allocated to registers r6 r7 
+                                   1058 ;------------------------------------------------------------
+                                   1059 ;	TIMER/TIMER.c:214: void initTimer2(unsigned int value)
+                                   1060 ;	-----------------------------------------
+                                   1061 ;	 function initTimer2
+                                   1062 ;	-----------------------------------------
+      0002EF                       1063 _initTimer2:
+      0002EF AE 82            [24] 1064 	mov	r6,dpl
+      0002F1 AF 83            [24] 1065 	mov	r7,dph
+                                   1066 ;	TIMER/TIMER.c:216: EA = 1;  //开中断
+      0002F3 D2 AF            [12] 1067 	setb	_EA
+                                   1068 ;	TIMER/TIMER.c:218: TIMER2FUN = 0;
+      0002F5 E4               [12] 1069 	clr	a
+      0002F6 F5*08            [12] 1070 	mov	_TIMER2FUN,a
+      0002F8 F5*09            [12] 1071 	mov	(_TIMER2FUN + 1),a
+                                   1072 ;	TIMER/TIMER.c:219: T2CON = 0x00;
+                                   1073 ;	1-genFromRTrack replaced	mov	_T2CON,#0x00
+      0002FA F5 C8            [12] 1074 	mov	_T2CON,a
+                                   1075 ;	TIMER/TIMER.c:220: value = 65536 - value;
+      0002FC 8E 02            [24] 1076 	mov	ar2,r6
+      0002FE 8F 03            [24] 1077 	mov	ar3,r7
+      000300 7C 00            [12] 1078 	mov	r4,#0x00
+      000302 7D 00            [12] 1079 	mov	r5,#0x00
+      000304 C3               [12] 1080 	clr	c
+      000305 9A               [12] 1081 	subb	a,r2
+      000306 FA               [12] 1082 	mov	r2,a
+      000307 E4               [12] 1083 	clr	a
+      000308 9B               [12] 1084 	subb	a,r3
+      000309 FB               [12] 1085 	mov	r3,a
+      00030A 74 01            [12] 1086 	mov	a,#0x01
+      00030C 9C               [12] 1087 	subb	a,r4
+      00030D E4               [12] 1088 	clr	a
+      00030E 9D               [12] 1089 	subb	a,r5
+      00030F 8A 06            [24] 1090 	mov	ar6,r2
+      000311 8B 07            [24] 1091 	mov	ar7,r3
+                                   1092 ;	TIMER/TIMER.c:221: RCAP2H = value>>8;
+      000313 8F CB            [24] 1093 	mov	_RCAP2H,r7
+                                   1094 ;	TIMER/TIMER.c:222: RCAP2L = value;
+      000315 8E CA            [24] 1095 	mov	_RCAP2L,r6
+                                   1096 ;	TIMER/TIMER.c:223: TH2 = RCAP2H;
+      000317 85 CB CD         [24] 1097 	mov	_TH2,_RCAP2H
+                                   1098 ;	TIMER/TIMER.c:224: TL2 = RCAP2L;
+      00031A 85 CA CC         [24] 1099 	mov	_TL2,_RCAP2L
+                                   1100 ;	TIMER/TIMER.c:225: ET2 = 1;  //使能T2中断
+      00031D D2 AD            [12] 1101 	setb	_ET2
+                                   1102 ;	TIMER/TIMER.c:226: PT2 = 1;  //设置T2中断为高优先级
+      00031F D2 BD            [12] 1103 	setb	_PT2
+                                   1104 ;	TIMER/TIMER.c:227: TR2 = 1;  //启动T2
+      000321 D2 CA            [12] 1105 	setb	_TR2
+      000323 22               [24] 1106 	ret
+                                   1107 ;------------------------------------------------------------
+                                   1108 ;Allocation info for local variables in function 'startTimer2'
+                                   1109 ;------------------------------------------------------------
+                                   1110 ;	TIMER/TIMER.c:235: void startTimer2()
+                                   1111 ;	-----------------------------------------
+                                   1112 ;	 function startTimer2
+                                   1113 ;	-----------------------------------------
+      000324                       1114 _startTimer2:
+                                   1115 ;	TIMER/TIMER.c:237: TR2 = 1;  
+      000324 D2 CA            [12] 1116 	setb	_TR2
+      000326 22               [24] 1117 	ret
+                                   1118 ;------------------------------------------------------------
+                                   1119 ;Allocation info for local variables in function 'stopTimer2'
+                                   1120 ;------------------------------------------------------------
+                                   1121 ;	TIMER/TIMER.c:246: void stopTimer2()
+                                   1122 ;	-----------------------------------------
+                                   1123 ;	 function stopTimer2
+                                   1124 ;	-----------------------------------------
+      000327                       1125 _stopTimer2:
+                                   1126 ;	TIMER/TIMER.c:248: TR2 = 0;  
+      000327 C2 CA            [12] 1127 	clr	_TR2
+      000329 22               [24] 1128 	ret
+                                   1129 ;------------------------------------------------------------
+                                   1130 ;Allocation info for local variables in function 'InterruptTimer2'
+                                   1131 ;------------------------------------------------------------
+                                   1132 ;	TIMER/TIMER.c:257: void InterruptTimer2() __interrupt 5
+                                   1133 ;	-----------------------------------------
+                                   1134 ;	 function InterruptTimer2
+                                   1135 ;	-----------------------------------------
+      00032A                       1136 _InterruptTimer2:
+      00032A C0*00            [24] 1137 	push	bits
+      00032C C0 E0            [24] 1138 	push	acc
+      00032E C0 F0            [24] 1139 	push	b
+      000330 C0 82            [24] 1140 	push	dpl
+      000332 C0 83            [24] 1141 	push	dph
+      000334 C0 07            [24] 1142 	push	(0+7)
+      000336 C0 06            [24] 1143 	push	(0+6)
+      000338 C0 05            [24] 1144 	push	(0+5)
+      00033A C0 04            [24] 1145 	push	(0+4)
+      00033C C0 03            [24] 1146 	push	(0+3)
+      00033E C0 02            [24] 1147 	push	(0+2)
+      000340 C0 01            [24] 1148 	push	(0+1)
+      000342 C0 00            [24] 1149 	push	(0+0)
+      000344 C0 D0            [24] 1150 	push	psw
+      000346 75 D0 00         [24] 1151 	mov	psw,#0x00
+                                   1152 ;	TIMER/TIMER.c:259: TF2 = 0;
+      000349 C2 CF            [12] 1153 	clr	_TF2
+                                   1154 ;	TIMER/TIMER.c:260: if(TIMER2FUN != 0)
+      00034B E5*08            [12] 1155 	mov	a,_TIMER2FUN
+      00034D 45*09            [12] 1156 	orl	a,(_TIMER2FUN + 1)
+      00034F 60 09            [24] 1157 	jz	00103$
+                                   1158 ;	TIMER/TIMER.c:262: TIMER2FUN();
+      000351 85*08 82         [24] 1159 	mov	dpl,_TIMER2FUN
+      000354 85*09 83         [24] 1160 	mov	dph,(_TIMER2FUN + 1)
+      000357 12r00r00         [24] 1161 	lcall	__sdcc_call_dptr
+      00035A                       1162 00103$:
+      00035A D0 D0            [24] 1163 	pop	psw
+      00035C D0 00            [24] 1164 	pop	(0+0)
+      00035E D0 01            [24] 1165 	pop	(0+1)
+      000360 D0 02            [24] 1166 	pop	(0+2)
+      000362 D0 03            [24] 1167 	pop	(0+3)
+      000364 D0 04            [24] 1168 	pop	(0+4)
+      000366 D0 05            [24] 1169 	pop	(0+5)
+      000368 D0 06            [24] 1170 	pop	(0+6)
+      00036A D0 07            [24] 1171 	pop	(0+7)
+      00036C D0 83            [24] 1172 	pop	dph
+      00036E D0 82            [24] 1173 	pop	dpl
+      000370 D0 F0            [24] 1174 	pop	b
+      000372 D0 E0            [24] 1175 	pop	acc
+      000374 D0*00            [24] 1176 	pop	bits
+      000376 32               [24] 1177 	reti
+                                   1178 ;------------------------------------------------------------
+                                   1179 ;Allocation info for local variables in function 'setTimer2Fun'
+                                   1180 ;------------------------------------------------------------
+                                   1181 ;inTimerFun2               Allocated to registers 
+                                   1182 ;------------------------------------------------------------
+                                   1183 ;	TIMER/TIMER.c:272: void setTimer2Fun(void (*inTimerFun2)())
+                                   1184 ;	-----------------------------------------
+                                   1185 ;	 function setTimer2Fun
+                                   1186 ;	-----------------------------------------
+      000377                       1187 _setTimer2Fun:
+      000377 85 82*08         [24] 1188 	mov	_TIMER2FUN,dpl
+      00037A 85 83*09         [24] 1189 	mov	(_TIMER2FUN + 1),dph
+                                   1190 ;	TIMER/TIMER.c:274: TIMER2FUN = inTimerFun2;
+      00037D 22               [24] 1191 	ret
+                                   1192 	.area CSEG    (CODE)
+                                   1193 	.area CONST   (CODE)
+                                   1194 	.area XINIT   (CODE)
+                                   1195 	.area CABS    (ABS,CODE)
