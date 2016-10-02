@@ -151,13 +151,14 @@ void setDs1302Time(DataStruct *time)
 {
 	unsigned char buf[8];
 	buf[7] = 0;
-	buf[6] = time->year;
-	buf[5] = time->week;
-	buf[4] = time->month;
-	buf[3] = time->day;
-	buf[2] = time->hour;
-	buf[1] = time->minutes;
-	buf[0] = time->seconds;
+	buf[6] = ( (time->year) % 10 ) + ( (time->year / 10 % 10) << 4);  //年
+	buf[5] = time->week & 0x0F;                                   //星期
+	buf[4] = (time->month % 10) + ( (time->month / 10 % 10) << 4);//月
+	buf[3] = (time->day % 10) + ( (time->day / 10 % 10) << 4);//日
+	buf[2] = (time->hour % 10) + ( (time->hour / 10 % 10) << 4);//时
+	buf[1] = (time->minutes % 10) + ( (time->minutes / 10 % 10) << 4);//分
+	buf[0] = (time->seconds % 10) + ( (time->seconds / 10 % 10) << 4);//秒
+
 	ds1302BurstWrite(buf);
 }
 
@@ -171,11 +172,11 @@ void getDs1302Time(DataStruct *time)
 {
 	unsigned char buf[8];
 	ds1302BurstRead(buf);
-	time->year = buf[6] + 0x2000;
-	time->month = buf[4];
-	time->day = buf[3];
-	time->hour = buf[2];
-	time->minutes = buf[1];
-	time->seconds = buf[0];
-	time->week = buf[5];
+	time->year = ( (buf[6]&0xF0) >> 4) * 10 + (buf[6]&0x0F) + 2000;  //年
+	time->month = ( (buf[4]&0xF0) >> 4) * 10 + (buf[4]&0x0F) ;       //月
+	time->day = ( (buf[3]&0xF0) >> 4) * 10 + (buf[3]&0x0F);          //日
+	time->hour = ( (buf[2]&0x10) >> 4) * 10 + (buf[2]&0x0F);         //时
+	time->minutes = ( (buf[1]&0xF0) >> 4) * 10 + (buf[1]&0x0F);      //分
+	time->seconds = ( (buf[0]&0x70) >> 4) * 10 + (buf[0]&0x0F);      //秒
+	time->week = buf[5]&0x0F;                                //星期
 }
