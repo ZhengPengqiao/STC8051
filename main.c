@@ -1,45 +1,42 @@
+#include "LED.h"
 #include "TIMER.h"
-#include "LCD1602.h"
-#include "DS1302.h"
-#include "PCF8591.h"
+#include "LEDSHU.h"
+
+/*******************************************************************************
+ *  函数名称: LedShuFun
+ *  函数介绍: 定时任务到期时将会执行的函数
+ *  参数介绍: 无
+ *  返回值  : 无
+ ******************************************************************************/
+unsigned char ledarray[] = {0,0,0,0,0,0};
+unsigned int a = 0;
+
+void timerFun()
+{
+        a++;
+        ledarray[0] = a    % 10;
+        ledarray[1] = a /10 % 10;
+        ledarray[2] = a /100 % 10;
+        ledarray[3] = a /1000 % 10;
+        ledarray[4] = a /10000 % 10;
+}
+
+void timer2Fun()
+{
+        static unsigned char i = 0;
+        switch(i)
+        {
+                case 0:updateLedShu(ledarray);i = 0; break;   //定时刷新小灯状态,刷新小灯状态
+        }   
+}    
 
 void main()
 {
-	unsigned char val = 1;
-	unsigned char retval;
-	unsigned char str[16];
-	initLcd();
-
-	while (1)
-	{
-		//设置DA的数值
-		setDACValue(val);
-		str[0] = val / 100 % 10 + '0';
-		str[1] = val / 10 % 10 + '0';
-		str[2] = val     % 10 + '0';
-		str[3] = '\0';
-		LcdShowString(10,0,"VO:");
-		LcdShowString(13,0,str);
-		
-		//差分输入模式3,自动转换,因为是读取的上次转换的结果,所以读取的是1通道
-		retval = getADCAutoValue(DIFF3,1); 
-		str[0] = retval / 100 % 10 + '0';
-		str[1] = retval / 10 % 10 + '0';
-		str[2] = retval     % 10 + '0';
-		str[3] = '\0';
-		LcdShowString(0,0,"CHA0:");
-		LcdShowString(6,0,str);
-		
-		//差分输入模式3,自动转换,因为是读取的上次转换的结果,所以读取的是0通道
-		retval = getADCAutoValue(DIFF3,0);  
-		str[0] = retval / 100 % 10 + '0';
-		str[1] = retval / 10 % 10 + '0';
-		str[2] = retval     % 10 + '0';
-		str[3] = '\0';
-		LcdShowString(0,1,"CHA1:");
-		LcdShowString(6,1,str);
-		
-		val ++;
-		delay10usValue(50000);
-	}
+        addTIMER0Task(1000,timerFun,1);
+        initTimer2(600);
+        setTimer2Fun(timer2Fun);
+        while(1)
+        {
+            updateTIMER0();
+        }
 }
