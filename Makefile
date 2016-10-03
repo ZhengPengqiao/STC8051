@@ -1,6 +1,5 @@
 #找到所有的源文件
-SRC := main.c  ./TIMER/TIMER.c 	./I2C/I2C.c ./LCD1602/LCD1602.c \
-		./PCF8591/PCF8591.c
+SRC := main.c  ./TIMER/TIMER.c 	./LED/LED.c ./LEDZHEN/LEDZHEN.c ./LEDSHU/LEDSHU.c
 #找到所有的头文件路径
 INCLUDE := $(shell find ./ -name "*.h")
 # dir : 取目录函数
