@@ -29,6 +29,15 @@ void Led4Fun()
 }
 
 
+void timer2Fun()
+{
+	static unsigned char i = 0;
+	switch(i)
+	{
+		case 0:updateLed();i = 0; break;   //定时刷新小灯状态,刷新小灯状态
+	}   
+}	
+
 void main()
 {
 	
@@ -37,13 +46,10 @@ void main()
 	addTIMER0Task(2000,Led2Fun,1);  //添加一个定时任务
 	addTIMER0Task(4000,Led3Fun,1);  //添加一个定时任务
 	addTIMER0Task(8000,Led4Fun,1);  //添加一个定时任务
-		
+	initTimer2(600);
+	setTimer2Fun(timer2Fun);
 	while(1)
 	{
-		switch(updateStatus)  //减少每次刷新的时间,增加刷新的次数
-		{
-			case 0:updateTIMER0();  updateStatus = 1; break;  //刷新Timer0状态,处理发生的事件
-			case 1:updateLed(); updateStatus = 0; break;    //更新小灯状态
-		}
+		updateTIMER0();   //刷新Timer0状态,处理发生的事件
 	}
 }
