@@ -163,6 +163,7 @@ void updateTIMER0()
 				timer0TaskStruct[i].TimerFun0();    //调用函数
 				timer0TaskStruct[i].time = \
 					timer0TaskStruct[i].timeBack + timerClock;//定义下一次到达时间
+				return; //每次最多调用1个函数,减少单次运行时间
 			}
 		}
 	}

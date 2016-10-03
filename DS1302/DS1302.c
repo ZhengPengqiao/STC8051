@@ -175,7 +175,7 @@ void getDs1302Time(DataStruct *time)
 	time->year = ( (buf[6]&0xF0) >> 4) * 10 + (buf[6]&0x0F) + 2000;  //年
 	time->month = ( (buf[4]&0xF0) >> 4) * 10 + (buf[4]&0x0F) ;       //月
 	time->day = ( (buf[3]&0xF0) >> 4) * 10 + (buf[3]&0x0F);          //日
-	time->hour = ( (buf[2]&0x10) >> 4) * 10 + (buf[2]&0x0F);         //时
+	time->hour = ( (buf[2]&0xF0) >> 4) * 10 + (buf[2]&0x0F);         //时
 	time->minutes = ( (buf[1]&0xF0) >> 4) * 10 + (buf[1]&0x0F);      //分
 	time->seconds = ( (buf[0]&0x70) >> 4) * 10 + (buf[0]&0x0F);      //秒
 	time->week = buf[5]&0x0F;                                //星期
