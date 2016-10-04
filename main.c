@@ -18,9 +18,9 @@ void main()
 	addTIMER0Task(200,keyFun,2);
 	addTIMER0Task(1000,timerDataUpdate,3);
 	addTIMER0Task(1000,tempFun,4);
-	addTIMER0Task(1000,timerLcdUpdate,5);
+	addTIMER0Task(5000,timerLcdUpdate,5);
 	//设置定时器2
-	initTimer2(500);
+	initTimer2(300);
 	setTimer2Fun(timer2Fun);
 	initLcd();
 	

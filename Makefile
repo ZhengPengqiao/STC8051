@@ -1,7 +1,8 @@
 #找到所有的源文件
 SRC := main.c  ./TIMER/TIMER.c 	./LED/LED.c ./LEDZHEN/LEDZHEN.c \
 	./LEDSHU/LEDSHU.c ./LCD1602/LCD1602.c ./KEY/KEY.c ./DS1302/DS1302.c \
-	./DS18B20/DS18B20.c ./multiClock/multiClock.c ./BUZZER/BUZZER.c
+	./DS18B20/DS18B20.c ./multiClock/multiClock.c ./BUZZER/BUZZER.c 
+
 #找到所有的头文件路径
 INCLUDE := $(shell find ./ -name "*.h")
 # dir : 取目录函数

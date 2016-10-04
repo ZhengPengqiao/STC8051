@@ -8,6 +8,8 @@
 #include "DS18B20.h"
 #include "multiClock.h"
 #include "BUZZER.h"
+#include "I2C.h"
+#include "E2PROM.h"
 
 //点阵要显示的图像,周一到周日
 __xdata unsigned char image[] = {
@@ -18,6 +20,8 @@ __xdata unsigned char image[] = {
 0x81,0xF9,0xF9,0xC1,0x8F,0x9F,0x89,0xC3,
 0x87,0xF3,0xF1,0x81,0x91,0xB9,0x91,0xC3,
 0x81,0x8F,0xCF,0xC7,0xC7,0xE7,0xE3,0xE3,
+0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 };
 
 //用来计算存储LCD将要显示的信息
@@ -262,6 +266,7 @@ void changeNumber(char number)
 		case 0:
 			LcdShowString(15,1,lcdStr0);
 			minutes = minutes/10*10 + number;  
+			//e2promWriteByte(1,minutes);
 			break;
 		case 1:
 			LcdShowString(2,0,lcdStr0);
@@ -318,14 +323,17 @@ void changeNumber(char number)
 		case 14:
 			LcdShowString(11,1,lcdStr0); 
 			hour = hour%10 + number*10;
+			//e2promWriteByte(0,hour);
 			break;
 		case 15:
 			LcdShowString(12,1,lcdStr0); 
 			hour = hour/10*10 + number;
+			//e2promWriteByte(0,hour);
 			break;
 		case 16:
 			LcdShowString(14,1,lcdStr0);
 			minutes = minutes%10 + number*10; 
+			//e2promWriteByte(1,minutes);
 			break;
 	}
 	rightCursor();
@@ -344,14 +352,28 @@ void timerDataUpdate()
 		data[1] = date.seconds / 10;
 		data[0] = date.seconds % 10;
 		
-		if(date.hour >= hour && date.minutes >= minutes && \
+		if(date.hour == hour && date.minutes >= minutes && \
 						date.minutes < (minutes+1) && buzzerStop == 0)
 		{
 			buzzerStatue = 1;
 		}
 		
 		
-		index = (date.week-1)*8;
+		if(buzzerStatue == 1 && buzzerStop == 0)
+		{
+			if(index == 56)
+			{
+				index = 64;
+			}
+			else
+			{	
+				index = 56;
+			}
+		}
+		else
+		{
+			index = (date.week-1)*8;
+		}
 	}
 }
 
@@ -412,6 +434,7 @@ void initShow()
 	getDs1302Time(&date); //读取 DS1302 当前时间
 	timerDataUpdate();
 	//先显示一次信息
+	tempData = getDs18B20(); //第一次接收错误,开启转换时间太短?>
 	tempData = getDs18B20();
 	lcdStr0[0] = '2'; //添加年份的高 2 位:20
 	lcdStr0[1] = '0';
