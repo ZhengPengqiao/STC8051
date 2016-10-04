@@ -404,7 +404,7 @@ void timerLcdUpdate()
 
 void tempFun()
 {
-	//tempData = getDs18B20();
+	tempData = getDs18B20();
 }
 
 void initShow()

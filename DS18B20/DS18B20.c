@@ -19,6 +19,11 @@ void Delay_10us(unsigned int k)//us延时函数
 		NOP
 		NOP
 		NOP
+		NOP
+		NOP
+		NOP
+		NOP
+		NOP
 		__endasm;
 	}
 }
@@ -140,10 +145,10 @@ unsigned char read18B20()
  * 参数介绍 : 无
  * 返回值   : 整数温度
  ******************************************************************************/
-unsigned char getDs18B20(void) 
+int getDs18B20(void) 
 {
 	unsigned char V1,V2;   //定义高低8位 缓冲
-	unsigned char temp;    //定义温度缓冲寄存器
+	int temp;    //定义温度缓冲寄存器
 	char status;
 	status = get18B20Ack();
 	if( status == 0)
