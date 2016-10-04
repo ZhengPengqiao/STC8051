@@ -13,19 +13,7 @@
 
 void Delay_10us(unsigned int k)//us延时函数
 { 
-	while(k--)
-	{
-		__asm 
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		__endasm;
-	}
+	DelayUs(k*10);
 }
 
 

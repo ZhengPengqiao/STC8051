@@ -4,6 +4,7 @@
 #include <8052.h>
 #include "kingst.h"
 #include "config.h"
+#include "TIMER.h"
 
 //温度引脚
 #define Ds18b20IO P3_2     //温度传感器引脚
