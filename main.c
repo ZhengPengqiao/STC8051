@@ -1,45 +1,60 @@
+#include "LED.h"
 #include "TIMER.h"
+#include "LEDSHU.h"
+#include "LEDZHEN.h"
+#include "KEY.h"
+#include "BUZZER.h"
+#include "UART.h"
 #include "LCD1602.h"
-#include "DS1302.h"
-#include "PCF8591.h"
+#include "HC05.h"
+#include "DS18B20.h"
+#include "stdio.h"
 
 void main()
 {
-	unsigned char val = 1;
-	unsigned char retval;
-	unsigned char str[16];
-	initLcd();
 
-	while (1)
-	{
-		//设置DA的数值
-		setDACValue(val);
-		str[0] = val / 100 % 10 + '0';
-		str[1] = val / 10 % 10 + '0';
-		str[2] = val     % 10 + '0';
-		str[3] = '\0';
-		LcdShowString(10,0,"VO:");
-		LcdShowString(13,0,str);
+	char strTemp[6];
+	float ucTemp;
+		 
+	initLcd();
+   
+	while(1)
+	{   
+			   
+		int i;
+	   
+		if(get18B20Ack())
+		{
+			LcdShowString(0,1,"ERR");
+		}
+		else
+		{
+			LcdShowString(0,1,"OK");
+		}
 		
-		//差分输入模式3,自动转换,因为是读取的上次转换的结果,所以读取的是1通道
-		retval = getADCAutoValue(DIFF3,1); 
-		str[0] = retval / 100 % 10 + '0';
-		str[1] = retval / 10 % 10 + '0';
-		str[2] = retval     % 10 + '0';
-		str[3] = '\0';
-		LcdShowString(0,0,"CHA0:");
-		LcdShowString(6,0,str);
+		for(i = 0; i < 6; i++)
+		{
+						strTemp[i] = ' ';
+		}
 		
-		//差分输入模式3,自动转换,因为是读取的上次转换的结果,所以读取的是0通道
-		retval = getADCAutoValue(DIFF3,0);  
-		str[0] = retval / 100 % 10 + '0';
-		str[1] = retval / 10 % 10 + '0';
-		str[2] = retval     % 10 + '0';
-		str[3] = '\0';
-		LcdShowString(0,1,"CHA1:");
-		LcdShowString(6,1,str);
+		ucTemp = getDs18B20();           
+		strTemp[0] = (int)ucTemp /10 % 10+'0';       
+		strTemp[1] = (int)ucTemp %10+'0';
+		strTemp[2] = '\0';
+		LcdShowString(0,0,strTemp);
+
+
+		ucTemp = getFloatDs18B20();    
+		ucTemp *= 100; 
+		strTemp[0] = (int)ucTemp /1000 % 10+'0';       
+		strTemp[1] = (int)ucTemp /100 % 10+'0';
+		strTemp[2] = '.';
+		strTemp[3] = (int)ucTemp /10 % 10+'0';       
+		strTemp[4] = (int)ucTemp %10+'0';
+		strTemp[5] = '\0';
+		LcdShowString(0,1,strTemp);
 		
-		val ++;
+		delay10usValue(50000);
 		delay10usValue(50000);
 	}
 }
