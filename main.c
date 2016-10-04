@@ -1,45 +1,21 @@
 #include "LED.h"
 #include "TIMER.h"
 
-
-/*******************************************************************************
- *  函数名称: Led1Fun
- *  函数介绍: 定时任务到期时将会执行的函数
- *  参数介绍: 无
- *  返回值  : 无
- ******************************************************************************/
-void Led1Fun()
-{
-	setLedToggle(1);
-}
-
-void Led2Fun()
-{
-	setLedToggle(2);
-}
-
-void Led3Fun()
-{
-	setLedToggle(3);
-}
-
-void Led4Fun()
-{
-	setLedToggle(4);
-}
-
-
 void main()
 {
+	unsigned int i;
+    ADDR3 = 1;   //使能U3
+    ADDR2 = 1;   //
+    ADDR1 = 1;   //使能引脚LEDS6，使其输出高电平,也就是连接LED灯的引脚。
+    ADDR0 = 0;   //
+    ENLED = 0;   //使能U3/U4
 	
-	timer0Add(1000,Led1Fun,1);  //添加一个定时任务
-	timer0Add(2000,Led2Fun,1);  //添加一个定时任务
-	timer0Add(4000,Led3Fun,1);  //添加一个定时任务
-	timer0Add(8000,Led4Fun,1);  //添加一个定时任务
-		
 	while(1)
 	{
-		ledUpdate();
-		TIMER0Update();
+		for(i = 0; i < 10; i++)
+		{
+			DelayUs(50000);  //延时50ms,因为DelayUs最大可延时70微妙
+		}
+		LEDDATA = ~LEDDATA;
 	}
 }
