@@ -66,7 +66,7 @@ void time0Init()
 	
 	EA = 1;  //开中断
 	/*设置定时器*/
-	TMOD = 0x01;  //使能模式1
+	TMOD |= 0x01;  //使能模式1
 	timer0SetValue(timerCount);
     ET0 = 1;  //开定时器0的中断
     Timer0Start();
