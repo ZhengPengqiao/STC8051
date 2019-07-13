@@ -101,9 +101,9 @@ void sendString(char * str, int len)
  * 函数名称 : readChar
  * 函数介绍 : 读取字符
  * 参数介绍 : ch  :  读取的字符存放位置
- * 返回值  :  无
+ * 返回值  :  0:Ok -1:Err
  ******************************************************************************/
-char readChar()
+char readChar(char *och)
 {
 	if(start != end)
 	{
@@ -115,11 +115,12 @@ char readChar()
 			start = 0;
 		}
 
-		return ch;
+		*och = ch;
+		return 0;
 	}
 	else
 	{
-		return 0;
+		return -1;
 	}
 }
 
@@ -134,18 +135,19 @@ int readString(char * str, int len)
 {
 	char ch = 0;
 	int i = 0;
+	int ret;
 	if(len <= 0)
 	{
 		return -1;
 	}
-	ch = readChar();
-	while( ch != 0 )
+	ret = readChar(&ch);
+	while( ret == 0 )
 	{
 		*(str+i) = ch;
 		i++;
 		if( i < len )
 		{
-			ch = readChar();
+			ret = readChar(&ch);
 		}
 		else
 		{

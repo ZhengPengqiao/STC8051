@@ -9,6 +9,7 @@
  *INCLUDE头文件 
  ******************************************************************************/
 #include "TIMER.h"
+#include "UART.h"
 #include "config.h"
 #include "8052.h"
 unsigned long timerClock = 0;
@@ -110,6 +111,26 @@ void addTIMER0Task(unsigned int inTimerMs,void (*inTimerFun0)(),int intag)
 		}
 	}
 	
+}
+/*******************************************************************************
+ *  函数名字 ：  changeTIMER0Task
+ *  函数介绍 ：  修改指定任务的定时时间
+ *  参数介绍 ：  intag ： 要配置的任务号
+ * 			   inTimerMs ： 要配置的任务的定时时间
+ *  返回    ：  无   
+ ******************************************************************************/
+void changeTIMER0Task(int intag, unsigned int inTimerMs)
+{
+	int i;
+	for(i = 0; i < timer0TaskCount; i++)
+	{
+		if(timer0TaskStruct[i].tag == intag)
+		{
+			timer0TaskStruct[i].timeBack = inTimerMs;
+			timer0TaskStruct[i].time = timerClock + inTimerMs;
+			break;
+		}
+	}
 }
 /*******************************************************************************
  *  函数名字 ：  timer0Del
