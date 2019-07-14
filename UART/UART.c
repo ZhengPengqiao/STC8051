@@ -1,7 +1,7 @@
 #include "UART.h"
 #include "LED.h"
 __xdata char UART0_CHAR[RX_BUFFER_SIZE];   //接受缓冲区的字符
-int end,start;                     //接受缓冲区的使用情况
+int end=0,start = 0;                     //接受缓冲区的使用情况
 int sendstatus = 0;                //发送状态
 void (*UART0_RXISR_function)();    //接受中断函数
 void (*UART0_TXISR_function)();    //发送中断函数
@@ -17,9 +17,12 @@ void InterruptUART() __interrupt 4
 	if(RI)  //接收到新字符
 	{
 		RI = 0;
+
+		UART0_CHAR[end] = SBUF;
+
+		end++;
 		if(end >= RX_BUFFER_SIZE )
 			end = 0;
-		UART0_CHAR[end++] = SBUF;
 		if( UART0_RXISR_function != 0)
 		{
 			UART0_RXISR_function();
